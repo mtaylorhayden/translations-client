@@ -1,4 +1,5 @@
 import styles from "./Guides.module.css";
+import { Link, Outlet } from "react-router-dom";
 
 export const Guides = () => {
   return (
@@ -12,18 +13,22 @@ export const Guides = () => {
       </h4>
       <ul>
         <li>
-          <h3>Optative Mood</h3>
-          <p>
-            The optative mood in Turkish is used to express wishes, desires, or
-            requests.
-          </p>
+          <Link to="/guide/1">
+            <h3>Optative Mood</h3>
+            <p>
+              The optative mood in Turkish is used to express wishes, desires,
+              or requests.
+            </p>
+          </Link>
         </li>
         <li>
-          <h3>Imperative Mood</h3>
-          <p>
-            The imperative mood in Turkish is used to give commands, make
-            requests, or offer suggestions
-          </p>
+          <Link to="/guide/2">
+            <h3>Imperative Mood</h3>
+            <p>
+              The imperative mood in Turkish is used to give commands, make
+              requests, or offer suggestions
+            </p>
+          </Link>
         </li>
         <li>
           <h3>Past Tense</h3>
