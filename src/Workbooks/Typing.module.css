@@ -3,3 +3,23 @@
   border-color: green !important;
   box-shadow: 0 0 10px green !important;
 }
+
+.headerContainer {
+  text-align: center;
+  padding: 20px;
+}
+
+.headerTitle {
+  font-size: 2.5rem; /* Adjust the font size as needed */
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.headerDescription {
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+.label {
+  color: #ffffff;
+}

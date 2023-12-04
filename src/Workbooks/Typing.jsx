@@ -93,8 +93,8 @@ export const Typing = () => {
   if (!isLoading && currentTranslation) {
     content = (
       <Form>
-        <Form.Group className="mb-3" controlId="formGroupEmail">
-          <Form.Label className="text-center">
+        <Form.Group className="mb-3">
+          <Form.Label className={styles.label}>
             {/* english translation */}
             {currentTranslation.englishTranslation}
           </Form.Label>
@@ -123,8 +123,17 @@ export const Typing = () => {
 
   return (
     <Container>
-      <Row className="justify-content-center">
-        <Col md={6}>{content}</Col>
+      <Row className={`${styles.text} justify-content-center`}>
+        <div className={styles.headerContainer}>
+          <h1 className={styles.headerTitle}>Vocab Skills</h1>
+          <h4 className={styles.headerDescription}>
+            Practice your vocabulary by typing out the words or sentences
+            presented to you.
+          </h4>
+        </div>
+        <Col md={6} className={styles.text}>
+          {content}
+        </Col>
       </Row>
     </Container>
   );
