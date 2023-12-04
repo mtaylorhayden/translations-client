@@ -63,8 +63,19 @@ export const Typing = () => {
     setUserTranslation(e.target.value);
   };
 
+  const handleEnterKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      if (isCorrect) {
+        nextTranslationHanlder(e);
+      }
+    }
+  };
+
   const nextTranslationHanlder = (e) => {
     e.preventDefault();
+    setUserTranslation("");
+    setIsCorrect(false);
     setCurrentTranslation(translations[translationCounter + 1]);
     setTranslationCounter((prevState) => {
       return prevState + 1;
@@ -93,6 +104,7 @@ export const Typing = () => {
                   value={userTranslation}
                   onChange={onChangeHandler}
                   className={`${isCorrect ? styles.successOutline : ""}`}
+                  onKeyPress={handleEnterKeyPress}
                 />
               </Form.Group>
               {translationCounter < translations.length - 1 && (
@@ -100,6 +112,7 @@ export const Typing = () => {
                   type="button"
                   className="btn btn-primary mt-3"
                   onClick={nextTranslationHanlder}
+                  disabled={isCorrect ? false : true}
                 >
                   Next Translation
                 </button>
