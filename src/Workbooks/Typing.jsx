@@ -11,7 +11,7 @@ import styles from "./Typing.module.css";
 export const Typing = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [translations, setTranslations] = useState([]);
-  const [currentTranslation, setCurrentTranslation] = useState();
+  const [currentTranslation, setCurrentTranslation] = useState("");
   const [userTranslation, setUserTranslation] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
   const [translationCounter, setTranslationCounter] = useState(0);

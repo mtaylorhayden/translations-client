@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
+import styles from "./TranslationsInput.module.css";
 
 export const TranslationsInput = () => {
   const [words, setWords] = useState();
@@ -27,15 +28,20 @@ export const TranslationsInput = () => {
 
   return (
     <div className="App">
+      <div className={styles.headerContainer}>
+        <h1 className={styles.headerTitle}>Translation Input</h1>
+        <h4 className={styles.headerDescription}>
+          What words do you want to practice? Add your own!. Just make sure your
+          words are seperated by a comma.
+        </h4>
+      </div>
       <form onSubmit={onSubmitHandler}>
         <div className="form-group col-6 mx-auto">
-          <label>
-            Enter an English word then a Turkish word here. They should be comma
-            seperated
+          <label className={styles.label}>
+            Enter an English word then a Turkish word here.
           </label>
           <textarea
             className="form-control"
-            id="exampleFormControlTextarea1"
             rows="3"
             onBlur={onBlurHandler}
             value={words}
