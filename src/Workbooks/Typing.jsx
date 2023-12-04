@@ -3,11 +3,6 @@ import { Container, Form, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Typing.module.css";
 
-// when the page loads we should grab all of the data and store in our state
-// create state for data
-// use oneffect to load the data when the page loads
-// load the data into the form
-
 export const Typing = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [translations, setTranslations] = useState([]);
@@ -16,30 +11,23 @@ export const Typing = () => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [translationCounter, setTranslationCounter] = useState(0);
 
-  // API GET CALL
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:8080/translations");
         const data = await response.json();
         setTranslations(data);
+
+        if (data.length > 0) {
+          setCurrentTranslation(data[0]);
+          setIsLoading(false);
+        }
       } catch (error) {
         console.log("error ", error);
       }
     };
     fetchData();
   }, []);
-
-  // SetCurrentTranslation
-  useEffect(() => {
-    if (translations && translations.length > 0) {
-      const fetchTranslations = () => {
-        setCurrentTranslation(translations[0]);
-        setIsLoading(false);
-      };
-      fetchTranslations();
-    }
-  }, [translations]);
 
   // check currentTranslation
   useEffect(() => {
@@ -89,11 +77,7 @@ export const Typing = () => {
 
   let content = <p>Loading...</p>;
 
-  if (
-    !isLoading &&
-    !currentTranslation &&
-    translationCounter === translations.length
-  ) {
+  if (translationCounter === translations.length) {
     content = (
       <>
         <h2 className={styles.label}>Congrats you have finished this set</h2>
@@ -136,6 +120,7 @@ export const Typing = () => {
   return (
     <Container>
       <Row className={`${styles.text} justify-content-center`}>
+        {/* Header */}
         <div className={styles.headerContainer}>
           <h1 className={styles.headerTitle}>Vocab Skills</h1>
           <h4 className={styles.headerDescription}>
