@@ -80,6 +80,13 @@ export const Typing = () => {
     });
   };
 
+  const restartButtonHandler = (e) => {
+    setTranslationCounter(0);
+    setCurrentTranslation(translations[0]);
+    setUserTranslation("");
+    setIsCorrect(false);
+  };
+
   let content = <p>Loading...</p>;
 
   if (
@@ -87,7 +94,14 @@ export const Typing = () => {
     !currentTranslation &&
     translationCounter === translations.length
   ) {
-    content = <h2>Congrats you have finished this set</h2>;
+    content = (
+      <>
+        <h2 className={styles.label}>Congrats you have finished this set</h2>
+        <button className="btn btn-primary mt-3" onClick={restartButtonHandler}>
+          Restart?
+        </button>
+      </>
+    );
   }
 
   if (!isLoading && currentTranslation) {
@@ -107,16 +121,14 @@ export const Typing = () => {
             onKeyPress={handleEnterKeyPress}
           />
         </Form.Group>
-        {translationCounter < translations.length - 1 && (
-          <button
-            type="button"
-            className="btn btn-primary mt-3"
-            onClick={nextTranslationHanlder}
-            disabled={isCorrect ? false : true}
-          >
-            Next Translation
-          </button>
-        )}
+        <button
+          type="button"
+          className="btn btn-primary mt-3"
+          onClick={nextTranslationHanlder}
+          disabled={isCorrect ? false : true}
+        >
+          Next Translation
+        </button>
       </Form>
     );
   }
