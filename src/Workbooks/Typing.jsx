@@ -14,6 +14,7 @@ export const Typing = () => {
   const [currentTranslation, setCurrentTranslation] = useState();
   const [userTranslation, setUserTranslation] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
+  const [translationCounter, setTranslationCounter] = useState(0);
 
   // API GET CALL
   useEffect(() => {
@@ -52,6 +53,8 @@ export const Typing = () => {
       if (userTranslation === currentTranslation.turkishTranslation) {
         console.log("good job!");
         setIsCorrect(true);
+      } else {
+        setIsCorrect(false);
       }
     }
   }, [userTranslation, currentTranslation]);
@@ -62,10 +65,14 @@ export const Typing = () => {
 
   const nextTranslationHanlder = (e) => {
     e.preventDefault();
-
-    // when this button is clicked we should go to the next translation in the list
-    // we can call setNextTranslation here...?
+    setCurrentTranslation(translations[translationCounter + 1]);
+    setTranslationCounter((prevState) => {
+      return prevState + 1;
+    });
   };
+
+  console.log("translations length ", translations.length);
+  console.log("counter length ", translationCounter);
 
   return (
     <Container>
@@ -88,13 +95,15 @@ export const Typing = () => {
                   className={`${isCorrect ? styles.successOutline : ""}`}
                 />
               </Form.Group>
-              <button
-                type="button"
-                className="btn btn-primary mt-3"
-                onClick={nextTranslationHanlder}
-              >
-                Next Translation
-              </button>
+              {translationCounter < translations.length - 1 && (
+                <button
+                  type="button"
+                  className="btn btn-primary mt-3"
+                  onClick={nextTranslationHanlder}
+                >
+                  Next Translation
+                </button>
+              )}
             </Form>
           )}
         </Col>
