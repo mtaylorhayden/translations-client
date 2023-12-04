@@ -4,6 +4,7 @@ import { TranslationsInput } from "./Translations/TranslationsInput";
 import { NavigationBar } from "./Navigation/NavigationBar";
 import { Route, Routes } from "react-router-dom";
 import { Typing } from "./Workbooks/Typing";
+import { HomePage } from "./Home/HomePage";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <NavigationBar />
       <div>
         <Routes>
+          <Route path="/" element={<HomePage />} />
           <Route path="translations" element={<TranslationsInput />} />
           <Route path="typing" element={<Typing />} />
         </Routes>
