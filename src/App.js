@@ -1,12 +1,13 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { TranslationsInput } from "./Translations/TranslationsInput";
-import { NavigationBar } from "./Navigation/NavigationBar";
+import { NavigationBar } from "./Components/NavigationBar";
 import { Route, Routes } from "react-router-dom";
 import { Typing } from "./Workbooks/Typing";
 import { HomePage } from "./Home/HomePage";
 import { Guides } from "./Guides/Guides";
 import { Guide } from "./Guides/Guide";
+import { Footer } from "./Components/Footer";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="guide/:guideId" element={<Guide />} />
         </Routes>
       </div>
+      <Footer />
     </>
   );
 }
