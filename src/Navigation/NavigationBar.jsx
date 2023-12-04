@@ -31,6 +31,11 @@ export const NavigationBar = () => {
                 Typing
               </Link>
             </Nav.Link>
+            <Nav.Link>
+              <Link className={styles.NavLinkLinks} to="guides">
+                Guides
+              </Link>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
