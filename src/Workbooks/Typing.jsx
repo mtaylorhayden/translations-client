@@ -23,11 +23,8 @@ export const Typing = () => {
         const response = await fetch("http://localhost:8080/translations");
         const data = await response.json();
         setTranslations(data);
-        // console.log("translation ", data[0].englishTranslation);
       } catch (error) {
         console.log("error ", error);
-      } finally {
-        setIsLoading(false);
       }
     };
     fetchData();
@@ -38,6 +35,7 @@ export const Typing = () => {
     if (translations && translations.length > 0) {
       const fetchTranslations = () => {
         setCurrentTranslation(translations[0]);
+        setIsLoading(false);
       };
       fetchTranslations();
     }
@@ -82,44 +80,51 @@ export const Typing = () => {
     });
   };
 
-  console.log("translations length ", translations.length);
-  console.log("counter length ", translationCounter);
+  let content = <p>Loading...</p>;
+
+  if (
+    !isLoading &&
+    !currentTranslation &&
+    translationCounter === translations.length
+  ) {
+    content = <h2>Congrats you have finished this set</h2>;
+  }
+
+  if (!isLoading && currentTranslation) {
+    content = (
+      <Form>
+        <Form.Group className="mb-3" controlId="formGroupEmail">
+          <Form.Label className="text-center">
+            {/* english translation */}
+            {currentTranslation.englishTranslation}
+          </Form.Label>
+          <Form.Control
+            type="translation"
+            placeholder="Enter the word in Turkish"
+            value={userTranslation}
+            onChange={onChangeHandler}
+            className={`${isCorrect ? styles.successOutline : ""}`}
+            onKeyPress={handleEnterKeyPress}
+          />
+        </Form.Group>
+        {translationCounter < translations.length - 1 && (
+          <button
+            type="button"
+            className="btn btn-primary mt-3"
+            onClick={nextTranslationHanlder}
+            disabled={isCorrect ? false : true}
+          >
+            Next Translation
+          </button>
+        )}
+      </Form>
+    );
+  }
 
   return (
     <Container>
       <Row className="justify-content-center">
-        <Col md={6}>
-          {isLoading || !currentTranslation ? (
-            <p>Loading...</p>
-          ) : (
-            <Form>
-              <Form.Group className="mb-3" controlId="formGroupEmail">
-                <Form.Label className="text-center">
-                  {/* english translation */}
-                  {currentTranslation.englishTranslation}
-                </Form.Label>
-                <Form.Control
-                  type="translation"
-                  placeholder="Enter the word in Turkish"
-                  value={userTranslation}
-                  onChange={onChangeHandler}
-                  className={`${isCorrect ? styles.successOutline : ""}`}
-                  onKeyPress={handleEnterKeyPress}
-                />
-              </Form.Group>
-              {translationCounter < translations.length - 1 && (
-                <button
-                  type="button"
-                  className="btn btn-primary mt-3"
-                  onClick={nextTranslationHanlder}
-                  disabled={isCorrect ? false : true}
-                >
-                  Next Translation
-                </button>
-              )}
-            </Form>
-          )}
-        </Col>
+        <Col md={6}>{content}</Col>
       </Row>
     </Container>
   );
