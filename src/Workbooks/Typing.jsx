@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Form, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import styles from "./Typing.module.css";
 
 // when the page loads we should grab all of the data and store in our state
 // create state for data
@@ -12,6 +13,7 @@ export const Typing = () => {
   const [translations, setTranslations] = useState([]);
   const [currentTranslation, setCurrentTranslation] = useState();
   const [userTranslation, setUserTranslation] = useState("");
+  const [isCorrect, setIsCorrect] = useState(false);
 
   // API GET CALL
   useEffect(() => {
@@ -49,6 +51,7 @@ export const Typing = () => {
     ) {
       if (userTranslation === currentTranslation.turkishTranslation) {
         console.log("good job!");
+        setIsCorrect(true);
       }
     }
   }, [userTranslation, currentTranslation]);
@@ -82,6 +85,7 @@ export const Typing = () => {
                   placeholder="Enter the word in Turkish"
                   value={userTranslation}
                   onChange={onChangeHandler}
+                  className={`${isCorrect ? styles.successOutline : ""}`}
                 />
               </Form.Group>
               <button
