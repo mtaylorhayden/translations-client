@@ -4,8 +4,11 @@ import containerStyles from "../Styles/Container.module.css";
 import headerStyles from "../Styles/Header.module.css";
 import descriptionStyles from "../Styles/Description.module.css";
 import { useEffect, useState } from "react";
+import { useGuideContext } from "../Context/GuideContext";
 
 export const Guides = () => {
+  const { setSelectedGuide } = useGuideContext();
+
   const [guides, setGuides] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -23,6 +26,10 @@ export const Guides = () => {
     fetchData();
   }, []);
 
+  const handleGuideClick = (guide) => {
+    setSelectedGuide(guide);
+  };
+
   let content = <p>Loading...</p>;
 
   if (!isLoading && guides.length) {
@@ -32,7 +39,11 @@ export const Guides = () => {
         {guides.map((guide) => {
           return (
             <li>
-              <Link className={styles.link} to={`/guide/${guide.id}`}>
+              <Link
+                className={styles.link}
+                to={`/guide/${guide.id}`}
+                onClick={() => handleGuideClick(guide)}
+              >
                 <h3>{guide.title}</h3>
                 <p>{guide.description}</p>
               </Link>

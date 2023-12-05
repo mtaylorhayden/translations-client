@@ -3,11 +3,14 @@ import containerStyles from "../Styles/Container.module.css";
 import headerStyles from "../Styles/Header.module.css";
 import descriptionStyles from "../Styles/Description.module.css";
 import { useParams } from "react-router-dom";
+import { useGuideContext } from "../Context/GuideContext";
 
 export const Guide = (props) => {
   const { guideId } = useParams();
+  const { selectedGuide } = useGuideContext();
   console.log(guideId);
-  console.log("props ", props);
+  console.log("selectedGuide ", selectedGuide);
+
   return (
     <div className={containerStyles.container}>
       <div className={headerStyles.header}>Optative Mood</div>
