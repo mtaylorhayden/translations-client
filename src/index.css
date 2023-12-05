@@ -12,6 +12,13 @@ code {
     monospace;
 } */
 
+/* CSS Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html,
 body,
 #root {
@@ -19,4 +26,14 @@ body,
   margin: 0;
   padding: 0;
   background-color: #2b2b2b;
+}
+
+html {
+  overflow-y: scroll; /* Add a vertical scrollbar */
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }

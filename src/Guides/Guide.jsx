@@ -11,65 +11,64 @@ export const Guide = (props) => {
         The optative mood in Turkish is used to express wishes, desires, or
         requests.
       </h4>
-      <div className={styles.examples}>Add examples here</div>
-
-      <table>
+      <h3 className={styles.description}>Examples:</h3>
+      <ul>
+        <li>Umarım iyi olursun.</li>
+        <li>Translation: I hope you feel well.</li>
+      </ul>
+      {/* <div className={styles.examples}>Add examples here</div> */}
+      <table border="1">
         <thead>
           <tr>
-            <th>Column 1</th>
-            <th>Column 2</th>
-            <th>Column 3</th>
-            <th>Column 4</th>
-            <th>Column 5</th>
-            <th>Column 6</th>
-            <th>Column 7</th>
+            <th></th>
+            <th>Olumlu - Positive</th>
+            <th>Olumsuz - Negative</th>
+            <th>Olumlu Soru - Positive Question</th>
+            <th>Olumsuz Soru - Negative Question</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Row 1, Col 1</td>
-            <td>Row 1, Col 2</td>
-            <td>Row 1, Col 3</td>
-            <td>Row 1, Col 4</td>
-            <td>Row 1, Col 5</td>
-            <td>Row 1, Col 6</td>
-            <td>Row 1, Col 7</td>
+            <td className={styles.row}>Ben</td>
+            <td className={styles.inside}>Geleyim</td>
+            <td className={styles.inside}>Gelmeyeyim</td>
+            <td className={styles.inside}>Geleyim mi</td>
+            <td className={styles.inside}>Gelmeyeyim mi</td>
           </tr>
           <tr>
-            <td>Row 2, Col 1</td>
-            <td>Row 2, Col 2</td>
-            <td>Row 2, Col 3</td>
-            <td>Row 2, Col 4</td>
-            <td>Row 2, Col 5</td>
-            <td>Row 2, Col 6</td>
-            <td>Row 2, Col 7</td>
+            <td className={styles.row}>Sen</td>
+            <td className={styles.inside}>-</td>
+            <td className={styles.inside}>-</td>
+            <td className={styles.inside}>-</td>
+            <td className={styles.inside}>-</td>
           </tr>
           <tr>
-            <td>Row 3, Col 1</td>
-            <td>Row 3, Col 2</td>
-            <td>Row 3, Col 3</td>
-            <td>Row 3, Col 4</td>
-            <td>Row 3, Col 5</td>
-            <td>Row 3, Col 6</td>
-            <td>Row 3, Col 7</td>
+            <td className={styles.row}>O</td>
+            <td className={styles.inside}>-</td>
+            <td className={styles.inside}>-</td>
+            <td className={styles.inside}>-</td>
+            <td className={styles.inside}>-</td>
           </tr>
           <tr>
-            <td>Row 4, Col 1</td>
-            <td>Row 4, Col 2</td>
-            <td>Row 4, Col 3</td>
-            <td>Row 4, Col 4</td>
-            <td>Row 4, Col 5</td>
-            <td>Row 4, Col 6</td>
-            <td>Row 4, Col 7</td>
+            <td className={styles.row}>Biz</td>
+            <td className={styles.inside}>Gelelim</td>
+            <td className={styles.inside}>Gelmeyelim</td>
+            <td className={styles.inside}>Gelelim mi</td>
+            <td className={styles.inside}>Gelmeyelim mi</td>
           </tr>
           <tr>
-            <td>Row 5, Col 1</td>
-            <td>Row 5, Col 2</td>
-            <td>Row 5, Col 3</td>
-            <td>Row 5, Col 4</td>
-            <td>Row 5, Col 5</td>
-            <td>Row 5, Col 6</td>
-            <td>Row 5, Col 7</td>
+            <td className={styles.row}>Siz</td>
+            <td className={styles.inside}>-</td>
+            <td className={styles.inside}>-</td>
+            <td className={styles.inside}>-</td>
+            <td className={styles.inside}>-</td>
+          </tr>
+          <tr>
+            <td className={styles.row}>Onlar</td>
+            <td className={styles.inside}>-</td>
+            <td className={styles.inside}>-</td>
+            <td className={styles.inside}>-</td>
+            <td className={styles.inside}>-</td>
           </tr>
         </tbody>
       </table>

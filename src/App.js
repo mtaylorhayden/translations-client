@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <NavigationBar />
-      <div>
+      <div className="main">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="translations" element={<TranslationsInput />} />

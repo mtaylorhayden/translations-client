@@ -35,6 +35,15 @@ td {
   text-align: left;
 }
 
-th {
+th,
+.row {
   background-color: #f2f2f2;
+}
+
+.inside {
+  background-color: #9e9e9e;
+}
+
+li {
+  color: #ffffff;
 }
