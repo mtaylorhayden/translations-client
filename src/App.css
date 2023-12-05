@@ -42,10 +42,3 @@
   flex: 1; /* Make the main content flexible to take up the remaining space */
   padding: 20px; /* Add padding to create space between content and footer */
 }
-
-footer {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 10px;
-}

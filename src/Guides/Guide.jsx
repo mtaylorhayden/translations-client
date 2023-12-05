@@ -1,17 +1,20 @@
 import styles from "./Guide.module.css";
+import containerStyles from "../Styles/Container.module.css";
+import headerStyles from "../Styles/Header.module.css";
+import descriptionStyles from "../Styles/Description.module.css";
 import { useParams } from "react-router-dom";
 
 export const Guide = (props) => {
   const { guideId } = useParams();
   console.log(guideId);
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>Optative Mood</div>
-      <h4 className={styles.description}>
+    <div className={containerStyles.container}>
+      <div className={headerStyles.header}>Optative Mood</div>
+      <div className={descriptionStyles.description}>
         The optative mood in Turkish is used to express wishes, desires, or
         requests.
-      </h4>
-      <h3 className={styles.description}>Examples:</h3>
+      </div>
+      <h3 className={descriptionStyles.description}>Examples:</h3>
       <ul>
         <li>Umarım iyi olursun.</li>
         <li>Translation: I hope you feel well.</li>

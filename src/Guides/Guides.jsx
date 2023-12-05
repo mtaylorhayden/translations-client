@@ -1,16 +1,19 @@
 import styles from "./Guides.module.css";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
+import containerStyles from "../Styles/Container.module.css";
+import headerStyles from "../Styles/Header.module.css";
+import descriptionStyles from "../Styles/Description.module.css";
 
 export const Guides = () => {
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>Guides</div>
-      <h4 className={styles.description}>
+    <div className={containerStyles.container}>
+      <div className={headerStyles.header}>Guides</div>
+      <div className={descriptionStyles.description}>
         What would you like to learn today? We have several guides her for you
         to learn from. Current levels are from A1 to A2, but if you don't see
         something useful you can add your own and always come back here to
         review!
-      </h4>
+      </div>
       <ul>
         <li>
           <Link to="/guide/1">

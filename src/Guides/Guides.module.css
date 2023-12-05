@@ -22,12 +22,6 @@
   color: #ffffff;
 }
 
-.footer {
-  font-style: italic;
-  font-size: 0.8rem;
-  color: #888;
-}
-
 ul {
   list-style-type: none;
   padding: 0;
@@ -40,6 +34,7 @@ li {
 
 h3 {
   margin-bottom: 5px;
+  color: #ffc107;
 }
 
 p {

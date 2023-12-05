@@ -1,11 +1,14 @@
 import React from "react";
 import styles from "./HomePage.module.css";
+import containerStyles from "../Styles/Container.module.css";
+import headerStyles from "../Styles/Header.module.css";
+import descriptionStyles from "../Styles/Description.module.css";
 
 export const HomePage = () => {
   return (
-    <div className={styles.container}>
-      <div className={styles.header}>Welcome to Study!</div>
-      <div className={styles.description}>
+    <div className={containerStyles.container}>
+      <div className={headerStyles.header}>Welcome to Study!</div>
+      <div className={descriptionStyles.description}>
         I've created this application to help me learn, practice, and study my
         Turkish skills. Please feel free to poke around. This frontend is made
         using React and interacts with a Nest.js REST API that I built.
