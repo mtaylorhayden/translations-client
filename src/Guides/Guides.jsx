@@ -6,23 +6,10 @@ import { Header } from "../Components/Header";
 
 export const Guides = () => {
   const { setSelectedGuide } = useGuideContext();
+  const { guides } = useGuideContext();
+  const { isLoading } = useGuideContext();
 
-  const [guides, setGuides] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/guides");
-        const data = await response.json();
-        setGuides(data);
-        setIsLoading(false);
-      } catch (error) {
-        console.log("error ", error);
-      }
-    };
-    fetchData();
-  }, []);
+  console.log("Guides page ", guides);
 
   const handleGuideClick = (guide) => {
     setSelectedGuide(guide);
