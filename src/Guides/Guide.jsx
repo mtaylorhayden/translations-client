@@ -4,6 +4,9 @@ import headerStyles from "../Styles/Header.module.css";
 import descriptionStyles from "../Styles/Description.module.css";
 import { useParams } from "react-router-dom";
 import { useGuideContext } from "../Context/GuideContext";
+import { OptativeTable } from "../Tables/OptativeTable";
+import { PassTenseTable } from "../Tables/PassTenseTable";
+import { PresentContinousTable } from "../Tables/PresentContinousTable";
 
 export const Guide = () => {
   const { guideId } = useParams();
@@ -13,6 +16,19 @@ export const Guide = () => {
     return <li>{example}</li>;
   });
 
+  const getTable = () => {
+    switch (guideId) {
+      case "1":
+        return <OptativeTable />;
+      case "3":
+        return <PassTenseTable />;
+      case "4":
+        return <PresentContinousTable />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className={containerStyles.container}>
       <div className={headerStyles.header}>{selectedGuide.title}</div>
@@ -21,61 +37,8 @@ export const Guide = () => {
       </div>
       <h3 className={descriptionStyles.description}>Examples:</h3>
       <ul>{examples}</ul>
-      <table border="1">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Olumlu - Positive</th>
-            <th>Olumsuz - Negative</th>
-            <th>Olumlu Soru - Positive Question</th>
-            <th>Olumsuz Soru - Negative Question</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className={styles.row}>Ben</td>
-            <td className={styles.inside}>Geleyim</td>
-            <td className={styles.inside}>Gelmeyeyim</td>
-            <td className={styles.inside}>Geleyim mi</td>
-            <td className={styles.inside}>Gelmeyeyim mi</td>
-          </tr>
-          <tr>
-            <td className={styles.row}>Sen</td>
-            <td className={styles.inside}>-</td>
-            <td className={styles.inside}>-</td>
-            <td className={styles.inside}>-</td>
-            <td className={styles.inside}>-</td>
-          </tr>
-          <tr>
-            <td className={styles.row}>O</td>
-            <td className={styles.inside}>-</td>
-            <td className={styles.inside}>-</td>
-            <td className={styles.inside}>-</td>
-            <td className={styles.inside}>-</td>
-          </tr>
-          <tr>
-            <td className={styles.row}>Biz</td>
-            <td className={styles.inside}>Gelelim</td>
-            <td className={styles.inside}>Gelmeyelim</td>
-            <td className={styles.inside}>Gelelim mi</td>
-            <td className={styles.inside}>Gelmeyelim mi</td>
-          </tr>
-          <tr>
-            <td className={styles.row}>Siz</td>
-            <td className={styles.inside}>-</td>
-            <td className={styles.inside}>-</td>
-            <td className={styles.inside}>-</td>
-            <td className={styles.inside}>-</td>
-          </tr>
-          <tr>
-            <td className={styles.row}>Onlar</td>
-            <td className={styles.inside}>-</td>
-            <td className={styles.inside}>-</td>
-            <td className={styles.inside}>-</td>
-            <td className={styles.inside}>-</td>
-          </tr>
-        </tbody>
-      </table>
+      <div className={descriptionStyles.description}>Verb Gelmek</div>
+      {getTable()}
     </div>
   );
 };
