@@ -7,6 +7,7 @@ import { useGuideContext } from "../Context/GuideContext";
 import { OptativeTable } from "../Tables/OptativeTable";
 import { PassTenseTable } from "../Tables/PassTenseTable";
 import { PresentContinousTable } from "../Tables/PresentContinousTable";
+import { Header } from "../Components/Header";
 
 export const Guide = () => {
   const { guideId } = useParams();
@@ -30,15 +31,11 @@ export const Guide = () => {
   };
 
   return (
-    <div className={containerStyles.container}>
-      <div className={headerStyles.header}>{selectedGuide.title}</div>
-      <div className={descriptionStyles.description}>
-        {selectedGuide.description}
-      </div>
+    <Header title={selectedGuide.title} description={selectedGuide.description}>
       <h3 className={descriptionStyles.description}>Examples:</h3>
       <ul>{examples}</ul>
       <div className={descriptionStyles.description}>Verb Gelmek</div>
       {getTable()}
-    </div>
+    </Header>
   );
 };

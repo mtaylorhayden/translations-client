@@ -1,10 +1,8 @@
 import styles from "./Guides.module.css";
 import { Link } from "react-router-dom";
-import containerStyles from "../Styles/Container.module.css";
-import headerStyles from "../Styles/Header.module.css";
-import descriptionStyles from "../Styles/Description.module.css";
 import { useEffect, useState } from "react";
 import { useGuideContext } from "../Context/GuideContext";
+import { Header } from "../Components/Header";
 
 export const Guides = () => {
   const { setSelectedGuide } = useGuideContext();
@@ -29,6 +27,10 @@ export const Guides = () => {
   const handleGuideClick = (guide) => {
     setSelectedGuide(guide);
   };
+
+  const description = `What would you like to learn today? We have several guides her for you to learn from. 
+    Current levels are from A1 to A2, but if you don't see something useful you can add your own 
+    and always come back here to review!`;
 
   let content = <p>Loading...</p>;
 
@@ -55,15 +57,8 @@ export const Guides = () => {
   }
 
   return (
-    <div className={containerStyles.container}>
-      <div className={headerStyles.header}>Guides</div>
-      <div className={descriptionStyles.description}>
-        What would you like to learn today? We have several guides her for you
-        to learn from. Current levels are from A1 to A2, but if you don't see
-        something useful you can add your own and always come back here to
-        review!
-      </div>
+    <Header title="Guides" description={description}>
       {content}
-    </div>
+    </Header>
   );
 };

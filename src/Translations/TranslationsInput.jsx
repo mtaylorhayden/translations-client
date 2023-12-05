@@ -1,12 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import styles from "./TranslationsInput.module.css";
-import containerStyles from "../Styles/Container.module.css";
-import headerStyles from "../Styles/Header.module.css";
-import descriptionStyles from "../Styles/Description.module.css";
+import { Header } from "../Components/Header";
 
 export const TranslationsInput = () => {
   const [words, setWords] = useState();
+
+  const description = `What words do you want to practice? Add your own!. Just make sure your
+        words are seperated by a comma.`;
 
   const onBlurHandler = (e) => {
     setWords(e.target.value);
@@ -30,13 +31,7 @@ export const TranslationsInput = () => {
   };
 
   return (
-    <div className={containerStyles.container}>
-      <div className={headerStyles.header}>Translation Input</div>
-      <div className={descriptionStyles.description}>
-        What words do you want to practice? Add your own!. Just make sure your
-        words are seperated by a comma.
-      </div>
-
+    <Header title="Translation Input" description={description}>
       <form onSubmit={onSubmitHandler}>
         <div className="form-group">
           <label className={styles.label}>
@@ -53,6 +48,6 @@ export const TranslationsInput = () => {
           Enter
         </button>
       </form>
-    </div>
+    </Header>
   );
 };

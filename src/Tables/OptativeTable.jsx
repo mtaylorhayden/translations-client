@@ -17,8 +17,8 @@ export const OptativeTable = () => {
           <td className={styles.row}>Ben</td>
           <td className={styles.inside}>Geleyim</td>
           <td className={styles.inside}>Gelmeyeyim</td>
-          <td className={styles.inside}>Geleyim mi</td>
-          <td className={styles.inside}>Gelmeyeyim mi</td>
+          <td className={styles.inside}>Geleyim mi?</td>
+          <td className={styles.inside}>Gelmeyeyim mi?</td>
         </tr>
         <tr>
           <td className={styles.row}>Sen</td>
@@ -38,8 +38,8 @@ export const OptativeTable = () => {
           <td className={styles.row}>Biz</td>
           <td className={styles.inside}>Gelelim</td>
           <td className={styles.inside}>Gelmeyelim</td>
-          <td className={styles.inside}>Gelelim mi</td>
-          <td className={styles.inside}>Gelmeyelim mi</td>
+          <td className={styles.inside}>Gelelim mi?</td>
+          <td className={styles.inside}>Gelmeyelim mi?</td>
         </tr>
         <tr>
           <td className={styles.row}>Siz</td>
