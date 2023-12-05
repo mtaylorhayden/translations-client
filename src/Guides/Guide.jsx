@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 export const Guide = (props) => {
   const { guideId } = useParams();
   console.log(guideId);
+  console.log("props ", props);
   return (
     <div className={containerStyles.container}>
       <div className={headerStyles.header}>Optative Mood</div>
@@ -19,7 +20,6 @@ export const Guide = (props) => {
         <li>Umarım iyi olursun.</li>
         <li>Translation: I hope you feel well.</li>
       </ul>
-      {/* <div className={styles.examples}>Add examples here</div> */}
       <table border="1">
         <thead>
           <tr>

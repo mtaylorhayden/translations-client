@@ -3,8 +3,46 @@ import { Link } from "react-router-dom";
 import containerStyles from "../Styles/Container.module.css";
 import headerStyles from "../Styles/Header.module.css";
 import descriptionStyles from "../Styles/Description.module.css";
+import { useEffect, useState } from "react";
 
 export const Guides = () => {
+  const [guides, setGuides] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/guides");
+        const data = await response.json();
+        setGuides(data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log("error ", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  let content = <p>Loading...</p>;
+
+  if (!isLoading && guides.length) {
+    console.log("guide data ", guides);
+    content = (
+      <ul>
+        {guides.map((guide) => {
+          return (
+            <li>
+              <Link className={styles.link} to={`/guide/${guide.id}`}>
+                <h3>{guide.title}</h3>
+                <p>{guide.description}</p>
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    );
+  }
+
   return (
     <div className={containerStyles.container}>
       <div className={headerStyles.header}>Guides</div>
@@ -14,35 +52,7 @@ export const Guides = () => {
         something useful you can add your own and always come back here to
         review!
       </div>
-      <ul>
-        <li>
-          <Link className={styles.link} to="/guide/1">
-            <h3>Optative Mood</h3>
-            <p>
-              The optative mood in Turkish is used to express wishes, desires,
-              or requests.
-            </p>
-          </Link>
-        </li>
-        <li>
-          <Link className={styles.link} to="/guide/2">
-            <h3>Imperative Mood</h3>
-            <p>
-              The imperative mood in Turkish is used to give commands, make
-              requests, or offer suggestions
-            </p>
-          </Link>
-        </li>
-        <li>
-          <Link className={styles.link} to="/guide/3">
-            <h3>Past Tense</h3>
-            <p>
-              The past tense suffix is used to express things that have happened
-              in the past.
-            </p>
-          </Link>
-        </li>
-      </ul>
+      {content}
     </div>
   );
 };
