@@ -16,7 +16,7 @@ export const Guides = () => {
       </div>
       <ul>
         <li>
-          <Link to="/guide/1">
+          <Link className={styles.link} to="/guide/1">
             <h3>Optative Mood</h3>
             <p>
               The optative mood in Turkish is used to express wishes, desires,
@@ -25,7 +25,7 @@ export const Guides = () => {
           </Link>
         </li>
         <li>
-          <Link to="/guide/2">
+          <Link className={styles.link} to="/guide/2">
             <h3>Imperative Mood</h3>
             <p>
               The imperative mood in Turkish is used to give commands, make
@@ -34,11 +34,13 @@ export const Guides = () => {
           </Link>
         </li>
         <li>
-          <h3>Past Tense</h3>
-          <p>
-            The past tense suffix is used to express things that have happened
-            in the past.
-          </p>
+          <Link className={styles.link} to="/guide/3">
+            <h3>Past Tense</h3>
+            <p>
+              The past tense suffix is used to express things that have happened
+              in the past.
+            </p>
+          </Link>
         </li>
       </ul>
     </div>
