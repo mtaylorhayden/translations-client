@@ -1,31 +1,11 @@
-.container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+.link {
+  color: #ffc107;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.header {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #ffffff;
-}
-
-.description {
-  font-size: 1.2rem;
-  margin-bottom: 30px;
-  color: #ffffff;
-}
-
-.benefits {
-  font-size: 1rem;
-  margin-bottom: 20px;
-  color: #ffffff;
-}
-
-.footer {
-  font-style: italic;
-  font-size: 0.8rem;
-  color: #888;
+.link:hover {
+  color: #0a0000;
 }
 
 ul {
@@ -35,7 +15,6 @@ ul {
 
 li {
   margin-bottom: 20px;
-  color: #ffc107;
 }
 
 h3 {

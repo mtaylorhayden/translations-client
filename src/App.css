@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  border: #61dafb;
 }
 
 .App-logo {
@@ -35,4 +36,9 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.main {
+  flex: 1; /* Make the main content flexible to take up the remaining space */
+  padding: 20px; /* Add padding to create space between content and footer */
 }
