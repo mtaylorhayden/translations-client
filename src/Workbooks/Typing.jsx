@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { Container, Form, Row, Col } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import styles from "./Typing.module.css";
+import containerStyles from "../Styles/Container.module.css";
+import headerStyles from "../Styles/Header.module.css";
+import descriptionStyles from "../Styles/Description.module.css";
 
 export const Typing = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -81,7 +84,7 @@ export const Typing = () => {
     content = (
       <>
         <h2 className={styles.label}>Congrats you have finished this set</h2>
-        <button className="btn btn-primary mt-3" onClick={restartButtonHandler}>
+        <button className="btn btn-primary" onClick={restartButtonHandler}>
           Restart?
         </button>
       </>
@@ -107,7 +110,7 @@ export const Typing = () => {
         </Form.Group>
         <button
           type="button"
-          className="btn btn-primary mt-3"
+          className="btn btn-primary"
           onClick={nextTranslationHanlder}
           disabled={isCorrect ? false : true}
         >
@@ -118,20 +121,18 @@ export const Typing = () => {
   }
 
   return (
-    <Container>
-      <Row className={`${styles.text} justify-content-center`}>
-        {/* Header */}
-        <div className={styles.headerContainer}>
-          <h1 className={styles.headerTitle}>Vocab Skills</h1>
-          <h4 className={styles.headerDescription}>
+    <div className={containerStyles.container}>
+      <Container>
+        <Row className={`${styles.text} justify-content-center`}>
+          {/* Header */}
+          <div className={headerStyles.header}>Vocab Skills</div>
+          <div className={descriptionStyles.description}>
             Practice your vocabulary by typing out the words or sentences
             presented to you.
-          </h4>
-        </div>
-        <Col md={6} className={styles.text}>
-          {content}
-        </Col>
-      </Row>
-    </Container>
+          </div>
+          <Col className={styles.text}>{content}</Col>
+        </Row>
+      </Container>
+    </div>
   );
 };
