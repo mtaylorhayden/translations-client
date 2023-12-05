@@ -5,24 +5,22 @@ import descriptionStyles from "../Styles/Description.module.css";
 import { useParams } from "react-router-dom";
 import { useGuideContext } from "../Context/GuideContext";
 
-export const Guide = (props) => {
+export const Guide = () => {
   const { guideId } = useParams();
   const { selectedGuide } = useGuideContext();
-  console.log(guideId);
-  console.log("selectedGuide ", selectedGuide);
+
+  const examples = selectedGuide.examples.split(",").map((example) => {
+    return <li>{example}</li>;
+  });
 
   return (
     <div className={containerStyles.container}>
-      <div className={headerStyles.header}>Optative Mood</div>
+      <div className={headerStyles.header}>{selectedGuide.title}</div>
       <div className={descriptionStyles.description}>
-        The optative mood in Turkish is used to express wishes, desires, or
-        requests.
+        {selectedGuide.description}
       </div>
       <h3 className={descriptionStyles.description}>Examples:</h3>
-      <ul>
-        <li>Umarım iyi olursun.</li>
-        <li>Translation: I hope you feel well.</li>
-      </ul>
+      <ul>{examples}</ul>
       <table border="1">
         <thead>
           <tr>
