@@ -1,6 +1,9 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import styles from "./TranslationsInput.module.css";
+import containerStyles from "../Styles/Container.module.css";
+import headerStyles from "../Styles/Header.module.css";
+import descriptionStyles from "../Styles/Description.module.css";
 
 export const TranslationsInput = () => {
   const [words, setWords] = useState();
@@ -27,27 +30,26 @@ export const TranslationsInput = () => {
   };
 
   return (
-    <div className="App">
-      <div className={styles.headerContainer}>
-        <h1 className={styles.headerTitle}>Translation Input</h1>
-        <h4 className={styles.headerDescription}>
-          What words do you want to practice? Add your own!. Just make sure your
-          words are seperated by a comma.
-        </h4>
+    <div className={containerStyles.container}>
+      <div className={headerStyles.header}>Translation Input</div>
+      <div className={descriptionStyles.description}>
+        What words do you want to practice? Add your own!. Just make sure your
+        words are seperated by a comma.
       </div>
+
       <form onSubmit={onSubmitHandler}>
-        <div className="form-group col-6 mx-auto">
+        <div className="form-group">
           <label className={styles.label}>
             Enter an English word then a Turkish word here.
           </label>
           <textarea
-            className="form-control"
+            className={`${styles.textarea} form-control`}
             rows="3"
             onBlur={onBlurHandler}
             value={words}
           ></textarea>
         </div>
-        <button type="submit" className="btn btn-primary mt-3">
+        <button type="submit" className="btn btn-primary">
           Enter
         </button>
       </form>
