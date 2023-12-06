@@ -11,8 +11,6 @@ export const GuideProvider = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("When does this useeffect get called?");
-        console.log("isLoading in context ", isLoading);
         const response = await fetch("http://localhost:8080/guides");
         const data = await response.json();
         setGuides(data);

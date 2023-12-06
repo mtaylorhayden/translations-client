@@ -1,6 +1,5 @@
 import styles from "./Guides.module.css";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { useGuideContext } from "../Context/GuideContext";
 import { Header } from "../Components/Header";
 
@@ -24,7 +23,7 @@ export const Guides = () => {
       <ul>
         {guides.map((guide) => {
           return (
-            <li>
+            <li key={guide.id}>
               <Link
                 className={styles.link}
                 to={`/guide/${guide.id}`}

@@ -11,6 +11,8 @@ export const NavigationBar = () => {
   const { guides } = useGuideContext();
   const { isLoading } = useGuideContext();
 
+  console.log("3 Navbar");
+
   const handleGuideClick = (id) => {
     const guide = guides.find((item) => item.id === id);
     setSelectedGuide(guide);
@@ -21,7 +23,7 @@ export const NavigationBar = () => {
   if (!isLoading) {
     content = guides.map((guide) => {
       return (
-        <NavDropdown.Item>
+        <NavDropdown.Item key={guide.id}>
           <Link
             className={styles.NavLinkLinks}
             to={`guide/${guide.id}`}
