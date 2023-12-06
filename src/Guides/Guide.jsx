@@ -1,6 +1,3 @@
-import styles from "./Guide.module.css";
-import containerStyles from "../Styles/Container.module.css";
-import headerStyles from "../Styles/Header.module.css";
 import descriptionStyles from "../Styles/Description.module.css";
 import { useParams } from "react-router-dom";
 import { useGuideContext } from "../Context/GuideContext";

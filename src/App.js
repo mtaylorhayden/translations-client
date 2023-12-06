@@ -16,7 +16,7 @@ function App() {
       <div className="main">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="translations" element={<TranslationsInput />} />
+          {/* <Route path="translations" element={<TranslationsInput />} /> */}
           <Route path="typing" element={<Typing />} />
           <Route path="guides" element={<Guides />} />
           <Route path="guide/:guideId" element={<Guide />} />
