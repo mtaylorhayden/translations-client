@@ -89,7 +89,7 @@ export const Guide = () => {
             </button>
           </div>
         ) : (
-          <Practice />
+          <Practice translations={guide.translations} />
         )}
       </Header>
     );

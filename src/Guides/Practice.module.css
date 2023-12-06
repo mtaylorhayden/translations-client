@@ -10,3 +10,8 @@
 .container {
   margin-top: 5%;
 }
+
+.success {
+  border-color: green !important;
+  box-shadow: 0 0 50px green !important;
+}
