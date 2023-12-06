@@ -1,0 +1,12 @@
+.label {
+  color: #ffffff;
+  font-size: 1.2rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.container {
+  margin-top: 5%;
+}

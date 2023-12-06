@@ -5,12 +5,15 @@ import { PassTenseTable } from "../Tables/PassTenseTable";
 import { PresentContinousTable } from "../Tables/PresentContinousTable";
 import { Header } from "../Components/Header";
 import { useEffect, useState } from "react";
+import { Practice } from "./Practice";
 
 export const Guide = () => {
   const { guideId } = useParams();
   const [guide, setGuide] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const [buttonIsHidden, setButtonIsHidden] = useState(false);
+  const [practiceIsHidden, setPracticeIsHidden] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +31,17 @@ export const Guide = () => {
     };
     fetchData();
   }, []);
+
+  const handlePracticeClick = () => {
+    // hide button
+    // combine these
+    // setButtonIsHidden(true);
+    setPracticeIsHidden(false);
+    // create new component for this
+    // show the infinitive verb and the english word
+    // show the input field
+    // render component, pass in the data through props
+  };
 
   const getTable = () => {
     switch (guideId) {
@@ -63,13 +77,20 @@ export const Guide = () => {
       <Header title={guide.title} description={guide.description}>
         <h3 className={styles.title}>Examples:</h3>
         <ul>{examples}</ul>
-        <div className={styles.verb}>Verb Gelmek</div>
+        <div className={styles.verb}>Gelmek conjugated</div>
         {getTable()}
-        <div className={styles.centerButton}>
-          <button className={`${styles.button} btn btn-primary`}>
-            Practice {guide.title}
-          </button>
-        </div>
+        {practiceIsHidden ? (
+          <div className={styles.centerButton}>
+            <button
+              className={`${styles.button} btn btn-primary`}
+              onClick={handlePracticeClick}
+            >
+              Practice {guide.title}
+            </button>
+          </div>
+        ) : (
+          <Practice />
+        )}
       </Header>
     );
   }
