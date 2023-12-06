@@ -1,6 +1,5 @@
 import styles from "./Guide.module.css";
 import { useParams } from "react-router-dom";
-import { OptativeTable } from "../Tables/OptativeTable";
 import { PassTenseTable } from "../Tables/PassTenseTable";
 import { PresentContinousTable } from "../Tables/PresentContinousTable";
 import { Header } from "../Components/Header";
@@ -18,11 +17,12 @@ export const Guide = () => {
     const fetchData = async () => {
       try {
         const response = await fetch(`http://localhost:8080/guides/${guideId}`);
+        if (!response.ok) {
+          setError("Sorry, we are having some issues");
+        }
         const data = await response.json();
-        console.log("data in guide useEffect ", data);
         setGuide(data);
       } catch (error) {
-        console.log("error fetching guide ", error);
         setError(error);
       } finally {
         setIsLoading(false);
@@ -32,14 +32,7 @@ export const Guide = () => {
   }, []);
 
   const handlePracticeClick = () => {
-    // hide button
-    // combine these
-    // setButtonIsHidden(true);
     setPracticeIsHidden(false);
-    // create new component for this
-    // show the infinitive verb and the english word
-    // show the input field
-    // render component, pass in the data through props
   };
 
   const getTable = () => {
@@ -48,8 +41,6 @@ export const Guide = () => {
         return <PresentContinousTable />;
       case "2":
         return <PassTenseTable />;
-      case "4":
-        return <PresentContinousTable />;
       default:
         return null;
     }
@@ -58,12 +49,10 @@ export const Guide = () => {
   let content = <p>Loading...</p>;
 
   if (error) {
-    content = <p>{error}</p>;
+    return (content = <p>{error}</p>);
   }
 
-  if (!isLoading && guide) {
-    console.log("is the data loaded? ", guide);
-
+  if (guide) {
     const examples = guide.examples ? (
       guide.examples.split(",").map((example, index) => {
         return <li key={index}>{example}</li>;

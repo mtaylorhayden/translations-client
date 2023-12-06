@@ -3,7 +3,6 @@ import styles from "./Practice.module.css";
 import { TurkishKeys } from "../Components/TurkishKeys";
 
 export const Practice = ({ translations }) => {
-  //   console.log("practice ", translations);
   const [isLoading, setIsLoading] = useState(true);
   const [userInput, setUserInput] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
@@ -65,9 +64,7 @@ export const Practice = ({ translations }) => {
   };
 
   const handleTurkishKeyClick = (turkishKey) => {
-    console.log("handleTurkishKeyClick ", turkishKey);
     setUserInput((prevValue) => prevValue + turkishKey);
-    // now add this value to the input box
   };
 
   let content = <p>Loading...</p>;

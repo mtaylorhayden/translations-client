@@ -6,23 +6,47 @@ export const TurkishKeys = (props) => {
 
   return (
     <>
-      <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-primary" onClick={onClickHandler}>
+      <div className="btn-group" role="group" aria-label="Basic example">
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={onClickHandler}
+        >
           ğ
         </button>
-        <button type="button" class="btn btn-primary" onClick={onClickHandler}>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={onClickHandler}
+        >
           ı
         </button>
-        <button type="button" class="btn btn-primary" onClick={onClickHandler}>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={onClickHandler}
+        >
           ş
         </button>
-        <button type="button" class="btn btn-primary" onClick={onClickHandler}>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={onClickHandler}
+        >
           ç
         </button>
-        <button type="button" class="btn btn-primary" onClick={onClickHandler}>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={onClickHandler}
+        >
           ö
         </button>
-        <button type="button" class="btn btn-primary" onClick={onClickHandler}>
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={onClickHandler}
+        >
           ü
         </button>
       </div>
