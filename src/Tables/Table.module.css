@@ -1,0 +1,25 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th,
+.row {
+  background-color: #f2f2f2;
+}
+
+.inside {
+  background-color: #9e9e9e;
+}
+
+li {
+  color: #ffffff;
+}

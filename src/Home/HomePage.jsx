@@ -1,19 +1,15 @@
 import React from "react";
 import styles from "./HomePage.module.css";
-import containerStyles from "../Styles/Container.module.css";
-import headerStyles from "../Styles/Header.module.css";
-import descriptionStyles from "../Styles/Description.module.css";
+import { Header } from "../Components/Header";
 
 export const HomePage = () => {
-  return (
-    <div className={containerStyles.container}>
-      <div className={headerStyles.header}>Welcome to Study!</div>
-      <div className={descriptionStyles.description}>
-        I've created this application to help me learn, practice, and study my
+  const description = `I've created this application to help me learn, practice, and study my
         Turkish skills. Please feel free to poke around. This frontend is made
         using React and interacts with a Nest.js REST API that I built.
-        Improvements coming often!
-      </div>
+        Improvements coming often!`;
+
+  return (
+    <Header title="Welcome To Study!" description={description}>
       <div className={styles.benefits}>
         Learning a second language has numerous benefits, such as enhancing
         cognitive abilities, improving communication skills, and gaining a
@@ -23,6 +19,6 @@ export const HomePage = () => {
         "Education is the most powerful weapon which you can use to change the
         world." - Nelson Mandela
       </div>
-    </div>
+    </Header>
   );
 };
