@@ -9,8 +9,6 @@ export const Guides = () => {
   const { guides } = useGuideContext();
   const { isLoading } = useGuideContext();
 
-  console.log("Guides page ", guides);
-
   const handleGuideClick = (guide) => {
     setSelectedGuide(guide);
   };
@@ -22,7 +20,6 @@ export const Guides = () => {
   let content = <p>Loading...</p>;
 
   if (!isLoading && guides.length) {
-    console.log("guide data ", guides);
     content = (
       <ul>
         {guides.map((guide) => {
