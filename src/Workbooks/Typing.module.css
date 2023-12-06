@@ -1,8 +1,8 @@
+.label {
+  color: #ffffff;
+}
+
 .successOutline {
   border-color: green !important;
   box-shadow: 0 0 50px green !important;
-}
-
-.label {
-  color: #ffffff;
 }
