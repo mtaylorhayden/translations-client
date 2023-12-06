@@ -12,7 +12,6 @@ export const Guide = () => {
   const [guide, setGuide] = useState();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
-  const [buttonIsHidden, setButtonIsHidden] = useState(false);
   const [practiceIsHidden, setPracticeIsHidden] = useState(true);
 
   useEffect(() => {
@@ -47,7 +46,7 @@ export const Guide = () => {
     switch (guideId) {
       case "1":
         return <PresentContinousTable />;
-      case "3":
+      case "2":
         return <PassTenseTable />;
       case "4":
         return <PresentContinousTable />;
@@ -77,7 +76,6 @@ export const Guide = () => {
       <Header title={guide.title} description={guide.description}>
         <h3 className={styles.title}>Examples:</h3>
         <ul>{examples}</ul>
-        <div className={styles.verb}>Gelmek conjugated</div>
         {getTable()}
         {practiceIsHidden ? (
           <div className={styles.centerButton}>

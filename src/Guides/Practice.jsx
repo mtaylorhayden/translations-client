@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./Practice.module.css";
+import { TurkishKeys } from "../Components/TurkishKeys";
 
 export const Practice = ({ translations }) => {
   //   console.log("practice ", translations);
@@ -63,6 +64,12 @@ export const Practice = ({ translations }) => {
     setTranslationCounter((prevState) => prevState + 1);
   };
 
+  const handleTurkishKeyClick = (turkishKey) => {
+    console.log("handleTurkishKeyClick ", turkishKey);
+    setUserInput((prevValue) => prevValue + turkishKey);
+    // now add this value to the input box
+  };
+
   let content = <p>Loading...</p>;
 
   if (!isLoading && currentTranslation.englishWord !== "") {
@@ -70,9 +77,12 @@ export const Practice = ({ translations }) => {
       <>
         <div>
           <label className={styles.label}>
-            Apply the lesson to: {currentTranslation.turkishInfinitive}
+            {currentTranslation.englishWord}
+            {" : "}
+            {currentTranslation.turkishInfinitive}
           </label>
         </div>
+
         <div className={`${styles.container} input-group mb-3`}>
           <input
             type="text"
@@ -82,6 +92,7 @@ export const Practice = ({ translations }) => {
             className={`${isCorrect ? styles.success : ""} form-control`}
           />
         </div>
+        <TurkishKeys onClickKeys={handleTurkishKeyClick} />
         <div className={styles.button}>
           <button
             className={`btn btn-primary`}

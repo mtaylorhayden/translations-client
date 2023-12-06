@@ -52,11 +52,11 @@ export const NavigationBar = () => {
                 Home
               </Link>
             </Nav.Link>
-            <Nav.Link>
+            {/* <Nav.Link>
               <Link className={styles.NavLinkLinks} to="translations">
                 Translations
               </Link>
-            </Nav.Link>
+            </Nav.Link> */}
             <Nav.Link>
               <Link className={styles.NavLinkLinks} to="typing">
                 Typing

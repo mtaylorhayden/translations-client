@@ -23,3 +23,10 @@ th,
 li {
   color: #ffffff;
 }
+
+.verb {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #ffffff;
+  text-align: center;
+}
