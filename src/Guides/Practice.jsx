@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Practice.module.css";
 import { TurkishKeys } from "../Components/TurkishKeys";
+import confetti from "https://esm.run/canvas-confetti@1";
 
 export const Practice = ({ translations }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -50,7 +51,11 @@ export const Practice = ({ translations }) => {
 
   const onClickNextHandler = () => {
     if (translations.length - 1 === translationCounter && isCorrect) {
-      setFinishMessage("Finished");
+      setFinishMessage("Congratulations!");
+      confetti({
+        particleCount: 150,
+        spread: 60,
+      });
       return;
     }
     setUserInput("");
