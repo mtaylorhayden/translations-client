@@ -1,4 +1,4 @@
-import descriptionStyles from "../Styles/Description.module.css";
+import styles from "./Guide.module.css";
 import { useParams } from "react-router-dom";
 import { OptativeTable } from "../Tables/OptativeTable";
 import { PassTenseTable } from "../Tables/PassTenseTable";
@@ -61,10 +61,15 @@ export const Guide = () => {
 
     content = (
       <Header title={guide.title} description={guide.description}>
-        <h3 className={descriptionStyles.description}>Examples:</h3>
+        <h3 className={styles.title}>Examples:</h3>
         <ul>{examples}</ul>
-        <div className={descriptionStyles.description}>Verb Gelmek</div>
+        <div className={styles.verb}>Verb Gelmek</div>
         {getTable()}
+        <div className={styles.centerButton}>
+          <button className={`${styles.button} btn btn-primary`}>
+            Practice {guide.title}
+          </button>
+        </div>
       </Header>
     );
   }
