@@ -87,6 +87,7 @@ export const Practice = ({ translations }) => {
   if (!isLoading && currentTranslation.englishWord !== "") {
     content = (
       <>
+        <ProgressBar progress={progress} />
         <div>
           <label className={styles.label}>
             {currentTranslation.englishWord}
@@ -94,7 +95,7 @@ export const Practice = ({ translations }) => {
             {currentTranslation.turkishInfinitive}
           </label>
         </div>
-        <ProgressBar progress={progress} />
+
         <div className={`${styles.container} input-group mb-3`}>
           <input
             type="text"
