@@ -23,7 +23,6 @@ export const Practice = ({ translations }) => {
 
   // set intial translation
   useEffect(() => {
-    console.log("useEffect called");
     if (translations.length > 0) {
       setCurrentTranslation({
         englishWord: translations[0].englishWord,
@@ -31,7 +30,6 @@ export const Practice = ({ translations }) => {
         turkishConjugated: translations[0].turkishConjugated,
       });
       setIsLoading(false);
-      console.log("in useEffect ", translations[0]);
     }
   }, [translations]);
 
@@ -43,7 +41,6 @@ export const Practice = ({ translations }) => {
         currentTranslation.turkishConjugated.toLowerCase()
       ) {
         setIsCorrect(true);
-        console.log("good job");
       } else {
         setIsCorrect(false);
       }
@@ -82,6 +79,12 @@ export const Practice = ({ translations }) => {
     setUserInput((prevValue) => prevValue + turkishKey);
   };
 
+  const handleEnterKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onClickNextHandler();
+    }
+  };
+
   let content = <p>Loading...</p>;
 
   if (!isLoading && currentTranslation.englishWord !== "") {
@@ -103,6 +106,7 @@ export const Practice = ({ translations }) => {
             onChange={onChangeHandler}
             value={userInput}
             className={`${isCorrect ? styles.success : ""} form-control`}
+            onKeyPress={handleEnterKeyPress}
           />
         </div>
         <TurkishKeys onClickKeys={handleTurkishKeyClick} />
