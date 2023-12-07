@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import styles from "./Practice.module.css";
 import { TurkishKeys } from "../Components/TurkishKeys";
 import confetti from "https://esm.run/canvas-confetti@1";
+import { ProgressBar } from "../Components/ProgressBar";
 
 export const Practice = ({ translations }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -14,6 +15,11 @@ export const Practice = ({ translations }) => {
   });
   const [translationCounter, setTranslationCounter] = useState(0);
   const [finishMessage, setFinishMessage] = useState(null);
+
+  const [progress, setProgress] = useState({
+    incrementValue: 100 / translations.length,
+    currentProgress: 0,
+  });
 
   // set intial translation
   useEffect(() => {
@@ -50,6 +56,10 @@ export const Practice = ({ translations }) => {
   };
 
   const onClickNextHandler = () => {
+    setProgress((prevProgress) => ({
+      ...prevProgress,
+      currentProgress: prevProgress.currentProgress + progress.incrementValue,
+    }));
     if (translations.length - 1 === translationCounter && isCorrect) {
       setFinishMessage("Congratulations!");
       confetti({
@@ -84,7 +94,7 @@ export const Practice = ({ translations }) => {
             {currentTranslation.turkishInfinitive}
           </label>
         </div>
-
+        <ProgressBar progress={progress} />
         <div className={`${styles.container} input-group mb-3`}>
           <input
             type="text"
@@ -95,6 +105,7 @@ export const Practice = ({ translations }) => {
           />
         </div>
         <TurkishKeys onClickKeys={handleTurkishKeyClick} />
+
         <div className={styles.button}>
           <button
             className={`btn btn-primary`}
