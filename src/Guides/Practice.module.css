@@ -1,0 +1,23 @@
+.label {
+  color: #ffffff;
+  font-size: 1.2rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+.container {
+  margin-top: 5%;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.success {
+  border-color: green !important;
+  box-shadow: 0 0 50px green !important;
+}

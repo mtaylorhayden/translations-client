@@ -1,6 +1,5 @@
 import styles from "./Guides.module.css";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { useGuideContext } from "../Context/GuideContext";
 import { Header } from "../Components/Header";
 
@@ -8,8 +7,6 @@ export const Guides = () => {
   const { setSelectedGuide } = useGuideContext();
   const { guides } = useGuideContext();
   const { isLoading } = useGuideContext();
-
-  console.log("Guides page ", guides);
 
   const handleGuideClick = (guide) => {
     setSelectedGuide(guide);
@@ -22,12 +19,11 @@ export const Guides = () => {
   let content = <p>Loading...</p>;
 
   if (!isLoading && guides.length) {
-    console.log("guide data ", guides);
     content = (
       <ul>
         {guides.map((guide) => {
           return (
-            <li>
+            <li key={guide.id}>
               <Link
                 className={styles.link}
                 to={`/guide/${guide.id}`}

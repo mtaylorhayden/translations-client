@@ -5,13 +5,12 @@ const GuideContext = createContext();
 export const GuideProvider = ({ children }) => {
   // State to hold the selected guide
   const [selectedGuide, setSelectedGuide] = useState(null);
-  const [guides, setGuides] = useState();
+  const [guides, setGuides] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("When does this useeffect get called?");
         const response = await fetch("http://localhost:8080/guides");
         const data = await response.json();
         setGuides(data);

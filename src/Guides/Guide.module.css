@@ -3,3 +3,25 @@
   margin-bottom: 20px;
   color: #ffffff;
 }
+
+.title {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #ffffff;
+}
+
+.button {
+  margin-top: 5%;
+}
+
+.verb {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.centerButton {
+  display: flex;
+  justify-content: center;
+}

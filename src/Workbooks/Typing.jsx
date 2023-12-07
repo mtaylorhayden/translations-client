@@ -40,7 +40,6 @@ export const Typing = () => {
       currentTranslation.turkishTranslation
     ) {
       if (userTranslation === currentTranslation.turkishTranslation) {
-        console.log("good job!");
         setIsCorrect(true);
       } else {
         setIsCorrect(false);
