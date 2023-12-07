@@ -123,7 +123,6 @@ export const Practice = ({ translations }) => {
           <input
             ref={inputRef}
             type="text"
-            aria-describedby="basic-addon2"
             onChange={onChangeHandler}
             value={userInput}
             className={`${isCorrect ? styles.success : ""} form-control`}
