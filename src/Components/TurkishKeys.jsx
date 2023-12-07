@@ -1,6 +1,5 @@
 export const TurkishKeys = (props) => {
   const onClickHandler = (e) => {
-    console.log("In TurkishKeys ", e.target.innerText);
     props.onClickKeys(e.target.innerText);
   };
 

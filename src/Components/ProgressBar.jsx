@@ -1,9 +1,6 @@
 import styles from "./ProgressBar.module.css";
-// update progress of status bar by setting the width
-//
 
 export const ProgressBar = (props) => {
-  console.log("progressBar :", props.progress.currentProgress);
   const progressBarStyles = {
     width: props.progress.currentProgress + "%",
   };

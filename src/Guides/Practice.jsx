@@ -5,6 +5,7 @@ import confetti from "https://esm.run/canvas-confetti@1";
 import { ProgressBar } from "../Components/ProgressBar";
 
 export const Practice = ({ translations }) => {
+  const inputRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
   const [userInput, setUserInput] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
@@ -77,6 +78,9 @@ export const Practice = ({ translations }) => {
 
   const handleTurkishKeyClick = (turkishKey) => {
     setUserInput((prevValue) => prevValue + turkishKey);
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   const handleEnterKeyPress = (e) => {
@@ -101,6 +105,7 @@ export const Practice = ({ translations }) => {
 
         <div className={`${styles.container} input-group mb-3`}>
           <input
+            ref={inputRef}
             type="text"
             aria-describedby="basic-addon2"
             onChange={onChangeHandler}
