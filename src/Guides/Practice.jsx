@@ -59,7 +59,7 @@ export const Practice = ({ translations }) => {
       currentProgress: prevProgress.currentProgress + progress.incrementValue,
     }));
     if (translations.length - 1 === translationCounter && isCorrect) {
-      setFinishMessage("Congratulations!");
+      setFinishMessage("Congratulations! You've finished practicing.");
       confetti({
         particleCount: 150,
         spread: 60,
@@ -87,6 +87,22 @@ export const Practice = ({ translations }) => {
     if (e.key === "Enter") {
       onClickNextHandler();
     }
+  };
+
+  const handleRestartClick = () => {
+    setUserInput("");
+    setTranslationCounter(0);
+    setProgress({
+      incrementValue: 100 / translations.length,
+      currentProgress: 0,
+    });
+    setIsCorrect(false);
+    setCurrentTranslation({
+      englishWord: translations[0].englishWord,
+      turkishInfinitive: translations[0].turkishInfinitive,
+      turkishConjugated: translations[0].turkishConjugated,
+    });
+    setFinishMessage(null);
   };
 
   let content = <p>Loading...</p>;
@@ -132,7 +148,14 @@ export const Practice = ({ translations }) => {
   return (
     <>
       {finishMessage ? (
-        <h2 className={styles.label}>{finishMessage}</h2>
+        <>
+          <h2 className={styles.label}>{finishMessage}</h2>
+          <div className={styles.button}>
+            <button className={`btn btn-primary`} onClick={handleRestartClick}>
+              Restart?
+            </button>
+          </div>
+        </>
       ) : (
         content
       )}
