@@ -52,6 +52,11 @@ export const NavigationBar = () => {
                 Home
               </Link>
             </Nav.Link>
+            <Nav.Link>
+              <Link className={styles.NavLinkLinks} to="/admin">
+                Admin
+              </Link>
+            </Nav.Link>
             {/* <Nav.Link>
               <Link className={styles.NavLinkLinks} to="translations">
                 Translations
