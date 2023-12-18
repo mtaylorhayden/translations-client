@@ -9,7 +9,6 @@ export const Dropdown = (props) => {
       (title) => title.title === e.target.value
     );
 
-    console.log("dropdown ", selectedGuide);
     props.setGuide(selectedGuide.id);
   };
 
@@ -28,7 +27,6 @@ export const Dropdown = (props) => {
       options={titles}
       onChange={onDropdownSelectHandler}
     >
-      {/* i need this key so i can identify which guide was selected for the path */}
       {titles.map((title) => (
         <option key={title.id} value={title.title}>
           {title.title}

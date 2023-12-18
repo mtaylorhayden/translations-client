@@ -7,14 +7,3 @@
   justify-content: center;
   margin-right: 5%;
 }
-
-.dropdown {
-  color: #ffffff;
-  font-size: 1.2rem;
-  display: flex;
-  margin-bottom: 5%;
-}
-
-.selectDropdown {
-  margin-left: 2.5%;
-}

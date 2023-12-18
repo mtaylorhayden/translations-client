@@ -1,46 +1,81 @@
-// import { useState } from "react";
-// import { Input } from "../Components/Input";
-// import { useGuideContext } from "../Context/GuideContext";
+// this should be navigated from either a home page and/or the navbar
+// lets just make the form and then see what we can make reusable.
 
-// export const CreateTranslation = () => {
-//   const { guides } = useGuideContext();
-//   const [sentence, setSentence] = useState({
-//     aSide: "",
-//     bSide: "",
-//     guideId: null,
-//   });
+import { useEffect, useState } from "react";
+import { Header } from "../Components/Header";
+import { useGuideContext } from "../Context/GuideContext";
+import { Button } from "../Components/Button";
+import styles from "./Create.module.css";
+import { Dropdown } from "../Components/Dropdown";
 
-//   const onDropdownSelectHandler = (e) => {
-//     setSentence((prevSentence) => ({
-//       ...prevSentence,
-//       guideId: e.target.value,
-//     }));
-//   };
+export const CreateTranslation = () => {
+  const { guides } = useGuideContext();
+  const { selectedGuide, setSelectedGuide } = useGuideContext();
+  const [translation, setTranslation] = useState({
+    englishWord: "",
+    turkishInfinitive: "",
+    turkishConjugated: "",
+  });
 
-//   let titles = [];
+  const englishWordChangeHandler = (e) => {
+    setTranslation((prevSentence) => ({
+      ...prevSentence,
+      englishWord: e.target.value,
+    }));
+  };
 
-//   titles = guides.map((guide) => {
-//     return guide.title;
-//   });
+  const turkishInfinitiveChangeHandler = (e) => {
+    setTranslation((prevSentence) => ({
+      ...prevSentence,
+      turkishInfinitive: e.target.value,
+    }));
+  };
 
-//   let dropDown = (
-//     <select
-//       className={styles.selectDropdown}
-//       options={titles}
-//       onChange={onDropdownSelectHandler}
-//     >
-//       {titles.map((title, index) => (
-//         <option key={index} value={title}>
-//           {title}
-//         </option>
-//       ))}
-//     </select>
-//   );
+  const turkishConjugatedChangeHandler = (e) => {
+    setTranslation((prevSentence) => ({
+      ...prevSentence,
+      turkishConjugated: e.target.value,
+    }));
+  };
 
-//   return (
-//     <div>
-//       <h2>Create Translation</h2>
-//       <Input label="Create Translation" />;
-//     </div>
-//   );
-// };
+  const guideChangeHandler = (guideId) => {
+    console.log("setGuide ", guideId);
+    setSelectedGuide(guideId);
+  };
+
+  return (
+    <Header title="Create a Translation">
+      <div className={styles.dropdown}>
+        Select a guide: {<Dropdown setGuide={guideChangeHandler} />}
+      </div>
+      <div className="input-group mb-3">
+        <div className={styles.label}>English Word</div>
+        <input
+          className="form-control"
+          type="text"
+          onChange={englishWordChangeHandler}
+          placeholder="To go"
+        />
+      </div>
+      <div className="input-group mb-3">
+        <div className={styles.label}>Turkish Infinitive</div>
+        <input
+          className="form-control"
+          type="text"
+          onChange={turkishInfinitiveChangeHandler}
+          placeholder="Gitmek"
+        />
+      </div>
+      <div className="input-group mb-3">
+        <div className={styles.label}>Turkish Conjugated</div>
+        <input
+          className="form-control"
+          type="text"
+          onChange={turkishConjugatedChangeHandler}
+          placeholder="Gidiyorum"
+        />
+      </div>
+      <Button data={translation} guideId={selectedGuide} path="translations" />
+    </Header>
+  );
+};

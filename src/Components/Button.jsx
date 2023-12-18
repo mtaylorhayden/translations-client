@@ -1,17 +1,15 @@
+import { useGuideContext } from "../Context/GuideContext";
 import styles from "./Button.module.css";
 
 export const Button = (props) => {
+  const { guides } = useGuideContext();
+  const effectiveGuideId = props.guideId || guides[0]?.id;
+
   const handleSubmit = async (e) => {
-    console.log("button props ", props);
-    const guideId = props.guideId;
-    if (!guideId) {
-      return "Please select a guide";
-    }
     try {
-      console.log("button props.data ", props.data);
       // we need to dynamically set this endpoint so all our forms can use this
       const response = await fetch(
-        `http://localhost:8080/${props.path}/guide/${guideId}`,
+        `http://localhost:8080/${props.path}/guide/${effectiveGuideId}`,
         {
           method: "POST",
           headers: {
