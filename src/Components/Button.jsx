@@ -1,25 +1,15 @@
 import { useGuideContext } from "../Context/GuideContext";
+import { useApiSubmit } from "../Hooks/useApiSubmit";
 import styles from "./Button.module.css";
 
-export const Button = (props) => {
+export const Button = ({ path, data }) => {
+  const submit = useApiSubmit();
+
   const { guides } = useGuideContext();
-  const effectiveGuideId = props.guideId || guides[0]?.id;
 
   const handleSubmit = async (e) => {
     try {
-      // we need to dynamically set this endpoint so all our forms can use this
-      const response = await fetch(
-        `http://localhost:8080/${props.path}/guide/${effectiveGuideId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(props.data),
-        }
-      );
-      const data = await response.json();
-      console.log("data ", data);
+      submit(path, data);
     } catch (error) {
       console.log("error ", error);
     }

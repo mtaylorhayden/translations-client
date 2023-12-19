@@ -3,7 +3,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 const GuideContext = createContext();
 
 export const GuideProvider = ({ children }) => {
-  // State to hold the selected guide
   const [selectedGuide, setSelectedGuide] = useState(null);
   const [guides, setGuides] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -14,6 +13,10 @@ export const GuideProvider = ({ children }) => {
         const response = await fetch("http://localhost:8080/guides");
         const data = await response.json();
         setGuides(data);
+        // setting default value for selectedGuide for createSentence and createTranslation
+        if (data && data.length > 0) {
+          setSelectedGuide(data[0].id);
+        }
         setIsLoading(false);
       } catch (error) {
         console.log("error ", error);
@@ -23,8 +26,9 @@ export const GuideProvider = ({ children }) => {
   }, []);
 
   return (
-    // Provide the context value with the state and updater function
-    <GuideContext.Provider value={{ selectedGuide, setSelectedGuide, guides }}>
+    <GuideContext.Provider
+      value={{ selectedGuide, setSelectedGuide, guides, isLoading }}
+    >
       {children}
     </GuideContext.Provider>
   );
