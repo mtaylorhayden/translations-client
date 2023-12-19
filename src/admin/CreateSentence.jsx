@@ -1,13 +1,10 @@
-// this should be navigated from either a home page and/or the navbar
-// lets just make the form and then see what we can make reusable.
-// right now I only see the button
-
 import { useState } from "react";
 import { Header } from "../Components/Header";
 import { useGuideContext } from "../Context/GuideContext";
 import { Button } from "../Components/Button";
 import styles from "./Create.module.css";
 import { Dropdown } from "../Components/Dropdown";
+import { CustomInput } from "../Components/CustomInput";
 
 export const CreateSentence = () => {
   const { isLoading } = useGuideContext();
@@ -18,6 +15,7 @@ export const CreateSentence = () => {
   });
 
   const aSideChangeHandler = (e) => {
+    console.log(e.target.value);
     setSentence((prevSentence) => ({
       ...prevSentence,
       aSide: e.target.value,
@@ -43,24 +41,16 @@ export const CreateSentence = () => {
         <div className={styles.dropdown}>
           Select a guide: {<Dropdown setGuide={guideChangeHandler} />}
         </div>
-        <div className="input-group mb-3">
-          <div className={styles.label}>A Side</div>
-          <input
-            className="form-control"
-            type="text"
-            onChange={aSideChangeHandler}
-            placeholder="merhaba"
-          />
-        </div>
-        <div className="input-group mb-3">
-          <div className={styles.label}>B Side</div>
-          <input
-            className="form-control"
-            type="text"
-            onChange={bSideChangeHandler}
-            placeholder="hello"
-          />
-        </div>
+        <CustomInput
+          label="A Side"
+          onChangeHandler={aSideChangeHandler}
+          placeholder={"Merhaba"}
+        />
+        <CustomInput
+          label="B Side"
+          onChangeHandler={bSideChangeHandler}
+          placeholder={"Hello"}
+        />
         <Button data={sentence} path={`sentences/guide/${selectedGuide}`} />
       </Header>
     );

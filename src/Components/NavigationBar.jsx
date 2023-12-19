@@ -11,8 +11,6 @@ export const NavigationBar = () => {
   const { guides } = useGuideContext();
   const { isLoading } = useGuideContext();
 
-  console.log("3 Navbar");
-
   const handleGuideClick = (id) => {
     const guide = guides.find((item) => item.id === id);
     setSelectedGuide(guide);
