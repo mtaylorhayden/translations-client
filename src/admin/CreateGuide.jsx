@@ -10,14 +10,14 @@ export const CreateGuide = () => {
     description: "",
     subDescription: "",
     examples: "",
-    translation: [
+    translations: [
       {
         englishWord: "",
         turkishInfinitive: "",
         turkishConjugated: "",
       },
     ],
-    sentence: [
+    sentences: [
       {
         aSide: "",
         bSide: "",
@@ -36,7 +36,7 @@ export const CreateGuide = () => {
   const sentenceInputChangeHandler = (e, index) => {
     const { name, value } = e.target;
 
-    const updatedSentence = guide.sentence.map((sentence, i) => {
+    const updatedSentence = guide.sentences.map((sentence, i) => {
       if (index === i) {
         return { ...sentence, [name]: value };
       }
@@ -44,14 +44,14 @@ export const CreateGuide = () => {
     });
     setGuide((prevGuide) => ({
       ...prevGuide,
-      sentence: updatedSentence,
+      sentences: updatedSentence,
     }));
   };
 
   const translationInputChangeHandler = (e, index) => {
     const { name, value } = e.target;
 
-    const updatedTranslation = guide.translation.map((translation, i) => {
+    const updatedTranslation = guide.translations.map((translation, i) => {
       if (index === i) {
         return { ...translation, [name]: value };
       }
@@ -60,13 +60,13 @@ export const CreateGuide = () => {
     setGuide((prevGuide) => {
       return {
         ...prevGuide,
-        translation: updatedTranslation,
+        translations: updatedTranslation,
       };
     });
     console.log("updatedTranslation ", guide);
   };
 
-  const sentenceInput = guide.sentence.map((sentence, sentenceIndex) => {
+  const sentenceInput = guide.sentences.map((sentence, sentenceIndex) => {
     return (
       <div key={sentenceIndex}>
         <CustomInput
@@ -83,7 +83,7 @@ export const CreateGuide = () => {
     );
   });
 
-  const translationInput = guide.translation.map(
+  const translationInput = guide.translations.map(
     (translation, translationIndex) => {
       return (
         <div key={translationIndex}>
