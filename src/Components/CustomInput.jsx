@@ -1,10 +1,10 @@
 import styles from "./CustomInput.module.css";
 
 // Use this for my div inputs
-export const CustomInput = ({ name, onChangeHandler, placeholder }) => {
+export const CustomInput = ({ name, onChangeHandler, placeholder, title }) => {
   return (
     <>
-      <div className={styles.label}>{placeholder}</div>
+      <div className={styles.label}>{title}</div>
       <div className="input-group mb-3">
         <input
           className="form-control"

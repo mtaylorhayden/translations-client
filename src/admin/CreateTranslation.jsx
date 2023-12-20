@@ -46,7 +46,7 @@ export const CreateTranslation = () => {
       </div>
 
       <CustomInput
-        label="English Word"
+        title="English Word"
         onChangeHandler={englishWordChangeHandler}
         placeholder="To go"
       />

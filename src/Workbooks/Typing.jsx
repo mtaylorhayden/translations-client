@@ -95,8 +95,7 @@ export const Typing = () => {
       <Form>
         <Form.Group className="mb-3">
           <Form.Label className={styles.label}>
-            {/* english translation */}
-            {currentTranslation.englishTranslation}
+            {currentTranslation.englishWord}
           </Form.Label>
           <Form.Control
             type="translation"
