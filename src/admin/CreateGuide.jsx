@@ -4,14 +4,6 @@ import { CustomInput, Input } from "../Components/CustomInput";
 import styles from "./Create.module.css";
 import { Button } from "../Components/Button";
 
-// can't update the sentences and translations.
-// we need to know which sentence and translation we want to update.
-// we could also eventually have multiple sentences and translations added to a guide in 1 call
-// TLDR none of the input handlers work.
-// for guide - any update overrides title
-// for sentence - a new field is made in the array
-// for translation - a new field is made in the first array and can't add other fields.
-
 export const CreateGuide = () => {
   const [guide, setGuide] = useState({
     title: "",
@@ -35,55 +27,91 @@ export const CreateGuide = () => {
 
   const guideInputChangeHandler = (e) => {
     const { name, value } = e.target;
-    console.log("guideInputChangeHandler1 ", name, value);
     setGuide((prevGuide) => ({
       ...prevGuide,
       [name]: value,
     }));
-    console.log("guideInputChangeHandler2 ", guide);
   };
 
-  const sentenceInputChangeHandler = (e) => {
+  const sentenceInputChangeHandler = (e, index) => {
     const { name, value } = e.target;
-    console.log(
-      "sentenceInputChangeHandler1 name",
-      name,
-      "sentenceInputChangeHandler1",
-      value
-    );
+
+    const updatedSentence = guide.sentence.map((sentence, i) => {
+      if (index === i) {
+        return { ...sentence, [name]: value };
+      }
+      return sentence;
+    });
     setGuide((prevGuide) => ({
       ...prevGuide,
-      sentence: {
-        ...prevGuide.sentence,
-        [name]: value,
-      },
+      sentence: updatedSentence,
     }));
-    console.log("sentenceInputChangeHandler2 ", guide);
   };
 
-  const translationInputChangeHandler = (e, arrayName, index) => {
+  const translationInputChangeHandler = (e, index) => {
     const { name, value } = e.target;
-    console.log("translationInputChangeHandler ", name, value);
 
-    setGuide((prevGuide) => {
-      // Copy the target array from the state
-      const updatedArray = [...prevGuide[arrayName]];
-
-      // Update the specific object within the array
-      updatedArray[index] = {
-        ...updatedArray[index],
-        [name]: value,
-      };
-      // Return the updated guide state
-      return { ...prevGuide, [arrayName]: updatedArray };
-
-      // translation: {
-      //   ...prevGuide.translation,
-      //   [name]: value,
-      // },
+    const updatedTranslation = guide.translation.map((translation, i) => {
+      if (index === i) {
+        return { ...translation, [name]: value };
+      }
+      return translation;
     });
-    console.log("translationInputChangeHandler ", guide);
+    setGuide((prevGuide) => {
+      return {
+        ...prevGuide,
+        translation: updatedTranslation,
+      };
+    });
+    console.log("updatedTranslation ", guide);
   };
+
+  const sentenceInput = guide.sentence.map((sentence, sentenceIndex) => {
+    return (
+      <div key={sentenceIndex}>
+        <CustomInput
+          placeholder="Sentence A Side"
+          name="aSide"
+          onChangeHandler={(e) => sentenceInputChangeHandler(e, sentenceIndex)}
+        />
+        <CustomInput
+          placeholder="Sentence B Side"
+          name="bSide"
+          onChangeHandler={(e) => sentenceInputChangeHandler(e, sentenceIndex)}
+        />
+      </div>
+    );
+  });
+
+  const translationInput = guide.translation.map(
+    (translation, translationIndex) => {
+      return (
+        <div key={translationIndex}>
+          <CustomInput
+            placeholder="English Word"
+            name="englishWord"
+            onChangeHandler={(e) =>
+              translationInputChangeHandler(e, translationIndex)
+            }
+          />
+          <CustomInput
+            placeholder="Turkish Infinitive"
+            name="turkishInfinitive"
+            onChangeHandler={(e) =>
+              translationInputChangeHandler(e, translationIndex)
+            }
+          />
+          <CustomInput
+            placeholder="Turkish Conjugated"
+            name="turkishConjugated"
+            onChangeHandler={(e) =>
+              translationInputChangeHandler(e, translationIndex)
+            }
+          />
+        </div>
+      );
+    }
+  );
 
   return (
     <Header title="Create a Guide">
@@ -107,33 +135,8 @@ export const CreateGuide = () => {
         name="examples"
         onChangeHandler={guideInputChangeHandler}
       />
-      <CustomInput
-        placeholder="Sentence A Side"
-        name="aSide"
-        onChangeHandler={sentenceInputChangeHandler}
-      />
-      <CustomInput
-        placeholder="Sentence B Side"
-        name="bSide"
-        onChangeHandler={sentenceInputChangeHandler}
-      />
-      <CustomInput
-        placeholder="English Word"
-        name="englishWord"
-        onChangeHandler={translationInputChangeHandler}
-      />
-      <CustomInput
-        placeholder="Turkish Infinitive"
-        name="turkishInfinitive"
-        onChangeHandler={translationInputChangeHandler}
-      />
-      <CustomInput
-        placeholder="Turkish Conjugated"
-        name="turkishConjugated"
-        onChangeHandler={(e) =>
-          translationInputChangeHandler(e, "translation", 0)
-        }
-      />
+      {sentenceInput}
+      {translationInput}
       <Button data={guide} path={`guides`} />
     </Header>
   );
