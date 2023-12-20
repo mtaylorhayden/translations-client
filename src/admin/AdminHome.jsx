@@ -4,6 +4,7 @@ import styles from "./AdminHome.module.css";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useGuideContext } from "../Context/GuideContext";
+import { DeleteGuideModal } from "./DeleteGuideModal";
 
 export const AdminHome = () => {
   const { guides, isLoading } = useGuideContext();
@@ -14,16 +15,14 @@ export const AdminHome = () => {
     content = (
       <div className={styles.guides}>
         {guides.map((guide) => (
-          <Link to={`/admin/${guide.id}`} key={guide.id}>
-            <Card style={{ width: "18rem" }} className={styles.guideCard}>
-              <Card.Body>
-                <Card.Title>{guide.title}</Card.Title>
-                <Card.Text>{guide.description}</Card.Text>
-                <Button variant="primary">Edit</Button>
-                <Button variant="danger">Delete</Button>
-              </Card.Body>
-            </Card>
-          </Link>
+          <Card style={{ width: "18rem" }} className={styles.guideCard}>
+            <Card.Body>
+              <Card.Title>{guide.title}</Card.Title>
+              <Card.Text>{guide.description}</Card.Text>
+              <Button variant="primary">Edit</Button>
+              <DeleteGuideModal title={guide.title} guideId={guide.id} />
+            </Card.Body>
+          </Card>
         ))}
       </div>
     );
