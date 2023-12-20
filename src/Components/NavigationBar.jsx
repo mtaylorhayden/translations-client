@@ -11,8 +11,6 @@ export const NavigationBar = () => {
   const { guides } = useGuideContext();
   const { isLoading } = useGuideContext();
 
-  console.log("3 Navbar");
-
   const handleGuideClick = (id) => {
     const guide = guides.find((item) => item.id === id);
     setSelectedGuide(guide);
@@ -50,6 +48,11 @@ export const NavigationBar = () => {
             <Nav.Link>
               <Link className={styles.NavLinkLinks} to="/">
                 Home
+              </Link>
+            </Nav.Link>
+            <Nav.Link>
+              <Link className={styles.NavLinkLinks} to="/admin">
+                Admin
               </Link>
             </Nav.Link>
             {/* <Nav.Link>

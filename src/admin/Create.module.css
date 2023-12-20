@@ -1,0 +1,14 @@
+/* css for all of the "create" pages */
+.label {
+  color: #ffffff;
+  font-size: 1.2rem;
+  text-align: center;
+  display: flex;
+  margin-right: 5%;
+  margin-top: 10%;
+}
+
+.dropdown {
+  color: #ffffff;
+  font-size: 1.2rem;
+}
