@@ -115,6 +115,7 @@ export const CreateGuide = () => {
 
   return (
     <Header title="Create a Guide">
+      <h2 className={styles.label}>Guide Fields</h2>
       <CustomInput
         placeholder="Title"
         onChangeHandler={guideInputChangeHandler}
@@ -135,7 +136,9 @@ export const CreateGuide = () => {
         name="examples"
         onChangeHandler={guideInputChangeHandler}
       />
+      <h2 className={styles.label}>Sentence Fields</h2>
       {sentenceInput}
+      <h2 className={styles.label}>Translation Fields</h2>
       {translationInput}
       <Button data={guide} path={`guides`} />
     </Header>

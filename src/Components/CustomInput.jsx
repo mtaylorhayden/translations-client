@@ -1,4 +1,4 @@
-import styles from "./Input.module.css";
+import styles from "./CustomInput.module.css";
 
 // Use this for my div inputs
 export const CustomInput = ({ name, onChangeHandler, placeholder }) => {
