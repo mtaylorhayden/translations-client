@@ -1,23 +1,28 @@
-.label {
-  color: #ffffff;
-  font-size: 1.2rem;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  margin-top: 5%;
+.card {
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px; /* This adds space between each card */
 }
 
-.container {
-  margin-top: 5%;
+.cardHeading {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  color: #333;
 }
 
-.button {
-  display: flex;
-  justify-content: center;
-  text-align: center;
+.card input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px; /* This adds space between the input fields */
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
-.success {
-  border-color: green !important;
-  box-shadow: 0 0 50px green !important;
+/* Add responsive design */
+@media (max-width: 768px) {
+  .card {
+    padding: 10px;
+  }
 }

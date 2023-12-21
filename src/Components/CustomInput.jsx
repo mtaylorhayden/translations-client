@@ -12,7 +12,7 @@ export const CustomInput = ({
   return (
     <>
       <div className={styles.label}>{title}</div>
-      <div className="input-group mb-3">
+      <div className={`${styles.cardHeading} input-group mb-3`}>
         <input
           className="form-control"
           type={type}

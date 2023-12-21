@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Header } from "../../Components/Header";
 import { CustomInput } from "../../Components/CustomInput";
-import styles from "../Create.module.css";
+import styles from "./Edit.module.css";
 import { EditGuideModal } from "./EditGuideModal";
 import { useGuideContext } from "../../Context/GuideContext";
+import { EditSentence, EditSentenceForm } from "./EditSentenceForm";
+import { EditTranslationForm } from "./EditTranslationForm";
 
 export const EditGuideForm = ({ guide }) => {
   const [updatedGuide, setUpdatedGuide] = useState(guide);
@@ -42,17 +44,17 @@ export const EditGuideForm = ({ guide }) => {
 
   const sentenceInputChangeHandler = (e, index) => {
     const { name, value } = e.target;
-    console.log("sentenceInputChangeHandler ", name, value);
 
-    const updatedSentence = guide.sentences.map((sentence, i) => {
+    const updatedSentences = updatedGuide.sentences.map((sentence, i) => {
       if (index === i) {
         return { ...sentence, [name]: value };
       }
       return sentence;
     });
+
     setUpdatedGuide((prevGuide) => ({
       ...prevGuide,
-      sentences: updatedSentence,
+      sentences: updatedSentences,
     }));
   };
 
@@ -75,101 +77,44 @@ export const EditGuideForm = ({ guide }) => {
 
   // ***************************** end change handlers *****************************
 
-  // ***************************** start sentence/translation inputs *****************************
-
-  const sentenceInput = updatedGuide.sentences.map(
-    (sentence, sentenceIndex) => {
-      return (
-        <div key={sentenceIndex}>
-          <CustomInput
-            title="A Side"
-            placeholder={sentence.aSide}
-            name="aSide"
-            value={sentence.aSide}
-            onChangeHandler={(e) =>
-              sentenceInputChangeHandler(e, sentenceIndex)
-            }
-          />
-          <CustomInput
-            title="B Side"
-            placeholder="Sentence B Side"
-            name="bSide"
-            value={sentence.bSide}
-            onChangeHandler={(e) =>
-              sentenceInputChangeHandler(e, sentenceIndex)
-            }
-          />
-        </div>
-      );
-    }
-  );
-
-  const translationInput = updatedGuide.translations.map(
-    (translation, translationIndex) => {
-      return (
-        <div key={translationIndex}>
-          <CustomInput
-            placeholder="English Word"
-            name="englishWord"
-            value={translation.englishWord}
-            onChangeHandler={(e) =>
-              translationInputChangeHandler(e, translationIndex)
-            }
-          />
-          <CustomInput
-            placeholder="Turkish Infinitive"
-            name="turkishInfinitive"
-            value={translation.turkishInfinitive}
-            onChangeHandler={(e) =>
-              translationInputChangeHandler(e, translationIndex)
-            }
-          />
-          <CustomInput
-            placeholder="Turkish Conjugated"
-            name="turkishConjugated"
-            value={translation.turkishConjugated}
-            onChangeHandler={(e) =>
-              translationInputChangeHandler(e, translationIndex)
-            }
-          />
-        </div>
-      );
-    }
-  );
-
-  // ***************************** end sentence/translation inputs
-
   return (
     <Header title="Edit a Guide">
       <h2 className={styles.label}>Guide Fields</h2>
-      <CustomInput
-        placeholder="Title"
-        onChangeHandler={guideInputChangeHandler}
-        name="title"
-        value={updatedGuide.title}
+      <div className={styles.card}>
+        <CustomInput
+          placeholder="Title"
+          onChangeHandler={guideInputChangeHandler}
+          name="title"
+          value={updatedGuide.title}
+        />
+        <CustomInput
+          placeholder="Description"
+          onChangeHandler={guideInputChangeHandler}
+          name="description"
+          value={updatedGuide.description}
+        />
+        <CustomInput
+          placeholder="Sub Description"
+          name="subDescription"
+          onChangeHandler={guideInputChangeHandler}
+          value={updatedGuide.subDescription}
+        />
+        <CustomInput
+          placeholder="Examples"
+          name="examples"
+          onChangeHandler={guideInputChangeHandler}
+          value={updatedGuide.examples}
+        />
+      </div>
+      <EditSentenceForm
+        guide={updatedGuide}
+        sentenceInputChangeHandler={sentenceInputChangeHandler}
       />
-      <CustomInput
-        placeholder="Description"
-        onChangeHandler={guideInputChangeHandler}
-        name="description"
-        value={updatedGuide.description}
+
+      <EditTranslationForm
+        guide={updatedGuide}
+        translationInputChangeHandler={translationInputChangeHandler}
       />
-      <CustomInput
-        placeholder="Sub Description"
-        name="subDescription"
-        onChangeHandler={guideInputChangeHandler}
-        value={updatedGuide.subDescription}
-      />
-      <CustomInput
-        placeholder="Examples"
-        name="examples"
-        onChangeHandler={guideInputChangeHandler}
-        value={updatedGuide.examples}
-      />
-      <h2 className={styles.label}>Sentence Fields</h2>
-      {sentenceInput}
-      <h2 className={styles.label}>Translation Fields</h2>
-      {translationInput}
       <button className="btn btn-primary" onClick={handleSubmitOnClick}>
         Submit
       </button>
