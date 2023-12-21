@@ -7,6 +7,10 @@ export const GuideProvider = ({ children }) => {
   const [guides, setGuides] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const deleteGuide = (id) => {
+    setGuides(guides.filter((guide) => guide.id !== id));
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,11 +27,17 @@ export const GuideProvider = ({ children }) => {
       }
     };
     fetchData();
-  }, []);
+  }, [setGuides, setIsLoading]);
 
   return (
     <GuideContext.Provider
-      value={{ selectedGuide, setSelectedGuide, guides, isLoading }}
+      value={{
+        selectedGuide,
+        setSelectedGuide,
+        guides,
+        isLoading,
+        deleteGuide,
+      }}
     >
       {children}
     </GuideContext.Provider>
