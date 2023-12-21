@@ -1,7 +1,13 @@
 import styles from "./CustomInput.module.css";
 
 // Use this for my div inputs
-export const CustomInput = ({ name, onChangeHandler, placeholder, title }) => {
+export const CustomInput = ({
+  name,
+  onChangeHandler,
+  placeholder,
+  title,
+  value,
+}) => {
   return (
     <>
       <div className={styles.label}>{title}</div>
@@ -12,6 +18,7 @@ export const CustomInput = ({ name, onChangeHandler, placeholder, title }) => {
           onChange={onChangeHandler}
           placeholder={placeholder}
           name={name}
+          value={value}
         />
       </div>
     </>
