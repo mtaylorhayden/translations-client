@@ -7,9 +7,29 @@ export const GuideProvider = ({ children }) => {
   const [guides, setGuides] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const deleteGuide = (id) => {
+    setGuides(guides.filter((guide) => guide.id !== id));
+  };
+
+  const addGuide = (newGuide) => {
+    setGuides([...guides, newGuide]);
+  };
+
+  const updateGuide = (updatedGuide, id) => {
+    setGuides((currentGuides) => {
+      return currentGuides.map((guide) => {
+        if (guide.id === id) {
+          return updatedGuide;
+        }
+        return guide;
+      });
+    });
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log("fetching guides");
         const response = await fetch("http://localhost:8080/guides");
         const data = await response.json();
         setGuides(data);
@@ -27,7 +47,15 @@ export const GuideProvider = ({ children }) => {
 
   return (
     <GuideContext.Provider
-      value={{ selectedGuide, setSelectedGuide, guides, isLoading }}
+      value={{
+        selectedGuide,
+        setSelectedGuide,
+        guides,
+        isLoading,
+        deleteGuide,
+        updateGuide,
+        addGuide,
+      }}
     >
       {children}
     </GuideContext.Provider>

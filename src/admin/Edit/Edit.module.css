@@ -1,0 +1,31 @@
+.label {
+  color: #ffffff;
+  font-size: 1.2rem;
+  text-align: center;
+  display: flex;
+  margin-right: 5%;
+  margin-top: 10%;
+}
+
+.submitBtn {
+  margin-top: 10%;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.card {
+  background: #f0f0f0;
+  border-color: #dddddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px; /* This adds space between each card */
+}
+
+/* Add responsive design */
+@media (max-width: 768px) {
+  .card {
+    padding: 10px;
+  }
+}

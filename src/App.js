@@ -1,6 +1,5 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { TranslationsInput } from "./Translations/TranslationsInput";
 import { NavigationBar } from "./Components/NavigationBar";
 import { Route, Routes } from "react-router-dom";
 import { Typing } from "./Workbooks/Typing";
@@ -9,9 +8,8 @@ import { Guides } from "./Guides/Guides";
 import { Guide } from "./Guides/Guide";
 import { Footer } from "./Components/Footer";
 import { AdminHome } from "./admin/AdminHome";
-import { CreateSentence } from "./admin/CreateSentence";
-import { CreateTranslation } from "./admin/CreateTranslation";
-import { CreateGuide } from "./admin/CreateGuide";
+import { CreateGuideForm } from "./admin/Create/CreateGuideForm";
+import { EditGuide } from "./admin/Edit/EditGuide";
 
 function App() {
   return (
@@ -25,12 +23,16 @@ function App() {
           <Route path="guides" element={<Guides />} />
           <Route path="guide/:guideId" element={<Guide />} />
           <Route path="admin" element={<AdminHome />} />
-          <Route path="admin/createSentence" element={<CreateSentence />} />
-          <Route path="admin/createGuide" element={<CreateGuide />} />
+          {/* <Route path="admin/createSentence" element={<CreateSentence />} /> */}
           <Route
+            path="admin/Create/createGuideForm"
+            element={<CreateGuideForm />}
+          />
+          {/* <Route
             path="admin/createTranslation"
             element={<CreateTranslation />}
-          />
+          /> */}
+          <Route path="admin/editGuide/:guideId" element={<EditGuide />} />
         </Routes>
       </div>
       <Footer />

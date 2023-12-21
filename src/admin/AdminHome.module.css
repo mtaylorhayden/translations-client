@@ -25,3 +25,14 @@ p {
   margin-top: 5px;
   color: #9e9e9e;
 }
+
+.guideCard {
+  margin-bottom: 5%;
+}
+
+.createGuideButton {
+  margin-bottom: 5%;
+  width: 18rem;
+}
+
+/* viewport styles here todo */

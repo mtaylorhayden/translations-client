@@ -5,8 +5,6 @@ import styles from "./Button.module.css";
 export const Button = ({ path, data }) => {
   const submit = useApiSubmit();
 
-  const { guides } = useGuideContext();
-
   const handleSubmit = async (e) => {
     try {
       submit(path, data);
