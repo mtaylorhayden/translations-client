@@ -11,9 +11,21 @@ export const GuideProvider = ({ children }) => {
     setGuides(guides.filter((guide) => guide.id !== id));
   };
 
+  const updateGuide = (updatedGuide, id) => {
+    setGuides((currentGuides) => {
+      return currentGuides.map((guide) => {
+        if (guide.id === id) {
+          return updatedGuide;
+        }
+        return guide;
+      });
+    });
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log("fetching guides");
         const response = await fetch("http://localhost:8080/guides");
         const data = await response.json();
         setGuides(data);
@@ -27,7 +39,7 @@ export const GuideProvider = ({ children }) => {
       }
     };
     fetchData();
-  }, [setGuides, setIsLoading]);
+  }, []);
 
   return (
     <GuideContext.Provider
@@ -37,6 +49,7 @@ export const GuideProvider = ({ children }) => {
         guides,
         isLoading,
         deleteGuide,
+        updateGuide,
       }}
     >
       {children}

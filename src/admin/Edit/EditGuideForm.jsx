@@ -2,17 +2,17 @@ import { useState } from "react";
 import { Header } from "../../Components/Header";
 import { CustomInput } from "../../Components/CustomInput";
 import styles from "../Create.module.css";
+import { EditGuideModal } from "./EditGuideModal";
+import { useGuideContext } from "../../Context/GuideContext";
 
-// TODO: need guides to reload on patch
 export const EditGuideForm = ({ guide }) => {
   const [updatedGuide, setUpdatedGuide] = useState(guide);
+  const [showModal, setShowModal] = useState(false);
+  const { updateGuide } = useGuideContext();
 
   const handleSubmitOnClick = async (e) => {
-    console.log("submit ", updatedGuide);
     e.preventDefault();
-
     const { id, ...guideData } = updatedGuide;
-
     try {
       const response = await fetch(`http://localhost:8080/guides/${id}`, {
         method: "PATCH",
@@ -21,8 +21,10 @@ export const EditGuideForm = ({ guide }) => {
         },
         body: JSON.stringify(guideData),
       });
-
-      // should we reload the page here with the updated guide and a success message?
+      if (response.ok) {
+        setShowModal(true);
+        updateGuide(updatedGuide, id);
+      }
     } catch (error) {
       console.error("API submission error", error);
       throw error;
@@ -171,6 +173,7 @@ export const EditGuideForm = ({ guide }) => {
       <button className="btn btn-primary" onClick={handleSubmitOnClick}>
         Submit
       </button>
+      {showModal && <EditGuideModal setShowModal={setShowModal} />}
     </Header>
   );
 };

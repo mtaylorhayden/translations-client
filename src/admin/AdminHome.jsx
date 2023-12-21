@@ -14,8 +14,12 @@ export const AdminHome = () => {
   if (!isLoading) {
     content = (
       <div className={styles.guides}>
-        {guides.map((guide) => (
-          <Card style={{ width: "18rem" }} className={styles.guideCard}>
+        {guides.map((guide, index) => (
+          <Card
+            style={{ width: "18rem" }}
+            className={styles.guideCard}
+            key={index}
+          >
             <Card.Body>
               <Card.Title>{guide.title}</Card.Title>
               <Card.Text>{guide.description}</Card.Text>
