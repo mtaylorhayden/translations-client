@@ -1,13 +1,35 @@
 import { useState } from "react";
-import { Header } from "../Components/Header";
-import { CustomInput } from "../Components/CustomInput";
-import styles from "./Create.module.css";
+import { Header } from "../../Components/Header";
+import { CustomInput } from "../../Components/CustomInput";
+import styles from "../Create.module.css";
 
+// TODO: need guides to reload on patch
 export const EditGuideForm = ({ guide }) => {
   const [updatedGuide, setUpdatedGuide] = useState(guide);
-  console.log("updatedGuide ", updatedGuide);
 
-  // ***************************** start change handlers
+  const handleSubmitOnClick = async (e) => {
+    console.log("submit ", updatedGuide);
+    e.preventDefault();
+
+    const { id, ...guideData } = updatedGuide;
+
+    try {
+      const response = await fetch(`http://localhost:8080/guides/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(guideData),
+      });
+
+      // should we reload the page here with the updated guide and a success message?
+    } catch (error) {
+      console.error("API submission error", error);
+      throw error;
+    }
+  };
+
+  // ***************************** start change handlers *****************************
   const guideInputChangeHandler = (e) => {
     const { name, value } = e.target;
     setUpdatedGuide((prevGuide) => ({
@@ -18,6 +40,7 @@ export const EditGuideForm = ({ guide }) => {
 
   const sentenceInputChangeHandler = (e, index) => {
     const { name, value } = e.target;
+    console.log("sentenceInputChangeHandler ", name, value);
 
     const updatedSentence = guide.sentences.map((sentence, i) => {
       if (index === i) {
@@ -46,33 +69,40 @@ export const EditGuideForm = ({ guide }) => {
         translations: updatedTranslation,
       };
     });
-    console.log("updatedTranslation ", guide);
   };
 
-  // ***************************** end change handlers
+  // ***************************** end change handlers *****************************
 
-  // ***************************** start sentence/translation inputs
+  // ***************************** start sentence/translation inputs *****************************
 
-  const sentenceInput = guide.sentences.map((sentence, sentenceIndex) => {
-    return (
-      <div key={sentenceIndex}>
-        <CustomInput
-          placeholder="Sentence A Side"
-          name="aSide"
-          value={sentence.aSide}
-          onChangeHandler={(e) => sentenceInputChangeHandler(e, sentenceIndex)}
-        />
-        <CustomInput
-          placeholder="Sentence B Side"
-          name="bSide"
-          value={sentence.bSide}
-          onChangeHandler={(e) => sentenceInputChangeHandler(e, sentenceIndex)}
-        />
-      </div>
-    );
-  });
+  const sentenceInput = updatedGuide.sentences.map(
+    (sentence, sentenceIndex) => {
+      return (
+        <div key={sentenceIndex}>
+          <CustomInput
+            title="A Side"
+            placeholder={sentence.aSide}
+            name="aSide"
+            value={sentence.aSide}
+            onChangeHandler={(e) =>
+              sentenceInputChangeHandler(e, sentenceIndex)
+            }
+          />
+          <CustomInput
+            title="B Side"
+            placeholder="Sentence B Side"
+            name="bSide"
+            value={sentence.bSide}
+            onChangeHandler={(e) =>
+              sentenceInputChangeHandler(e, sentenceIndex)
+            }
+          />
+        </div>
+      );
+    }
+  );
 
-  const translationInput = guide.translations.map(
+  const translationInput = updatedGuide.translations.map(
     (translation, translationIndex) => {
       return (
         <div key={translationIndex}>
@@ -138,7 +168,9 @@ export const EditGuideForm = ({ guide }) => {
       {sentenceInput}
       <h2 className={styles.label}>Translation Fields</h2>
       {translationInput}
-      <button className="btn btn-primary">Submit</button>
+      <button className="btn btn-primary" onClick={handleSubmitOnClick}>
+        Submit
+      </button>
     </Header>
   );
 };

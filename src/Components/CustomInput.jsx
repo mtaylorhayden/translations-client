@@ -7,6 +7,7 @@ export const CustomInput = ({
   placeholder,
   title,
   value,
+  type = "text",
 }) => {
   return (
     <>
@@ -14,7 +15,7 @@ export const CustomInput = ({
       <div className="input-group mb-3">
         <input
           className="form-control"
-          type="text"
+          type={type}
           onChange={onChangeHandler}
           placeholder={placeholder}
           name={name}

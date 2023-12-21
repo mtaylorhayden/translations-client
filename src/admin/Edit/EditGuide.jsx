@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useGuideContext } from "../Context/GuideContext";
+import { useGuideContext } from "../../Context/GuideContext";
 import { useEffect, useState } from "react";
 import { EditGuideForm } from "./EditGuideForm";
 

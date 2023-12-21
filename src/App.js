@@ -11,7 +11,7 @@ import { AdminHome } from "./admin/AdminHome";
 import { CreateSentence } from "./admin/CreateSentence";
 import { CreateTranslation } from "./admin/CreateTranslation";
 import { CreateGuide } from "./admin/CreateGuide";
-import { EditGuide } from "./admin/EditGuide";
+import { EditGuide } from "./admin/Edit/EditGuide";
 
 function App() {
   return (
