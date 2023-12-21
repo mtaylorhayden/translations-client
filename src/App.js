@@ -1,6 +1,5 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { TranslationsInput } from "./Translations/TranslationsInput";
 import { NavigationBar } from "./Components/NavigationBar";
 import { Route, Routes } from "react-router-dom";
 import { Typing } from "./Workbooks/Typing";
@@ -12,6 +11,7 @@ import { AdminHome } from "./admin/AdminHome";
 import { CreateSentence } from "./admin/CreateSentence";
 import { CreateTranslation } from "./admin/CreateTranslation";
 import { CreateGuide } from "./admin/CreateGuide";
+import { EditGuide } from "./admin/EditGuide";
 
 function App() {
   return (
@@ -31,6 +31,7 @@ function App() {
             path="admin/createTranslation"
             element={<CreateTranslation />}
           />
+          <Route path="admin/editGuide/:guideId" element={<EditGuide />} />
         </Routes>
       </div>
       <Footer />

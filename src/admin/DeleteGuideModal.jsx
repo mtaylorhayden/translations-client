@@ -3,9 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useGuideContext } from "../Context/GuideContext";
 
-// need to handle deleting page reloading, or not todo
 export const DeleteGuideModal = ({ title, guideId }) => {
-  console.log("DeleteGuideModal ", guideId);
   const [show, setShow] = useState(false);
   const { deleteGuide } = useGuideContext();
 

@@ -19,7 +19,13 @@ export const AdminHome = () => {
             <Card.Body>
               <Card.Title>{guide.title}</Card.Title>
               <Card.Text>{guide.description}</Card.Text>
-              <Button variant="primary">Edit</Button>
+              <Button
+                variant="primary"
+                as={Link}
+                to={`/admin/editGuide/${guide.id}`}
+              >
+                Edit
+              </Button>
               <DeleteGuideModal title={guide.title} guideId={guide.id} />
             </Card.Body>
           </Card>
