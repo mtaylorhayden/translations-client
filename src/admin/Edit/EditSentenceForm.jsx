@@ -1,32 +1,67 @@
 import { CustomInput } from "../../Components/CustomInput";
 import styles from "./Edit.module.css";
 
-export const EditSentenceForm = ({ guide, sentenceInputChangeHandler }) => {
-  let content = guide.sentences.map((sentence, sentenceIndex) => {
+// should be able to add/remove sentences
+export const EditSentenceForm = ({ sentences, sentenceInputChangeHandler }) => {
+  console.log("editSentenceForm ", sentences);
+  // const [sentences, setSentences] = useState(guide.sentences);
+
+  const inputChangeHandler = (e, index) => {
+    const { name, value } = e.target;
+    const updatedSentences = sentences.map((sentence, i) => {
+      if (i === index) {
+        return { ...sentence, [name]: value };
+      }
+      return sentence;
+    });
+    sentenceInputChangeHandler(updatedSentences);
+  };
+
+  const addSentenceHandler = () => {
+    const newSentence = { aSide: "", bSide: "" };
+    sentenceInputChangeHandler([...sentences, newSentence]);
+  };
+
+  const removeSentenceHandler = (e, sentenceIndex) => {
+    const newSentences = [...sentences];
+    newSentences.splice(sentenceIndex, 1);
+    sentenceInputChangeHandler(newSentences);
+  };
+
+  let content = sentences.map((sentence, sentenceIndex) => {
     return (
       <div key={sentenceIndex} className={styles.card}>
-        <div className={styles.cardHeading}></div>
         <CustomInput
           title="A Side"
           placeholder={sentence.aSide}
           name="aSide"
           value={sentence.aSide}
-          onChangeHandler={(e) => sentenceInputChangeHandler(e, sentenceIndex)}
+          onChangeHandler={(e) => inputChangeHandler(e, sentenceIndex)}
         />
         <CustomInput
           title="B Side"
           name="bSide"
           placeholder={sentence.bSide}
           value={sentence.bSide}
-          onChangeHandler={(e) => sentenceInputChangeHandler(e, sentenceIndex)}
+          onChangeHandler={(e) => inputChangeHandler(e, sentenceIndex)}
         />
+        <button
+          className="btn btn-danger"
+          onClick={(e) => removeSentenceHandler(e, sentenceIndex)}
+        >
+          Remove Sentence
+        </button>
       </div>
     );
   });
+
   return (
     <>
       <h2 className={styles.label}>Sentence Fields</h2>
       {content}
+      <button className="btn btn-primary" onClick={addSentenceHandler}>
+        Add Sentence
+      </button>
     </>
   );
 };

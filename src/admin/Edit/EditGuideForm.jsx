@@ -4,13 +4,14 @@ import { CustomInput } from "../../Components/CustomInput";
 import styles from "./Edit.module.css";
 import { EditGuideModal } from "./EditGuideModal";
 import { useGuideContext } from "../../Context/GuideContext";
-import { EditSentence, EditSentenceForm } from "./EditSentenceForm";
+import { EditSentenceForm } from "./EditSentenceForm";
 import { EditTranslationForm } from "./EditTranslationForm";
 
 export const EditGuideForm = ({ guide }) => {
   const [updatedGuide, setUpdatedGuide] = useState(guide);
   const [showModal, setShowModal] = useState(false);
   const { updateGuide } = useGuideContext();
+  console.log("updated guide", updatedGuide.sentences);
 
   const handleSubmitOnClick = async (e) => {
     e.preventDefault();
@@ -42,21 +43,28 @@ export const EditGuideForm = ({ guide }) => {
     }));
   };
 
-  const sentenceInputChangeHandler = (e, index) => {
-    const { name, value } = e.target;
-
-    const updatedSentences = updatedGuide.sentences.map((sentence, i) => {
-      if (index === i) {
-        return { ...sentence, [name]: value };
-      }
-      return sentence;
-    });
-
+  const updateSentence = (newSentence) => {
     setUpdatedGuide((prevGuide) => ({
       ...prevGuide,
-      sentences: updatedSentences,
+      sentences: newSentence,
     }));
   };
+
+  // const sentenceInputChangeHandler = (e, index) => {
+  //   const { name, value } = e.target;
+
+  //   const updatedSentences = updatedGuide.sentences.map((sentence, i) => {
+  //     if (index === i) {
+  //       return { ...sentence, [name]: value };
+  //     }
+  //     return sentence;
+  //   });
+
+  //   setUpdatedGuide((prevGuide) => ({
+  //     ...prevGuide,
+  //     sentences: updatedSentences,
+  //   }));
+  // };
 
   const translationInputChangeHandler = (e, index) => {
     const { name, value } = e.target;
@@ -107,8 +115,8 @@ export const EditGuideForm = ({ guide }) => {
         />
       </div>
       <EditSentenceForm
-        guide={updatedGuide}
-        sentenceInputChangeHandler={sentenceInputChangeHandler}
+        sentences={updatedGuide.sentences}
+        sentenceInputChangeHandler={updateSentence}
       />
 
       <EditTranslationForm
