@@ -34,7 +34,6 @@ export const EditGuideForm = ({ guide }) => {
     }
   };
 
-  // ***************************** start change handlers *****************************
   const guideInputChangeHandler = (e) => {
     const { name, value } = e.target;
     setUpdatedGuide((prevGuide) => ({
@@ -50,40 +49,12 @@ export const EditGuideForm = ({ guide }) => {
     }));
   };
 
-  // const sentenceInputChangeHandler = (e, index) => {
-  //   const { name, value } = e.target;
-
-  //   const updatedSentences = updatedGuide.sentences.map((sentence, i) => {
-  //     if (index === i) {
-  //       return { ...sentence, [name]: value };
-  //     }
-  //     return sentence;
-  //   });
-
-  //   setUpdatedGuide((prevGuide) => ({
-  //     ...prevGuide,
-  //     sentences: updatedSentences,
-  //   }));
-  // };
-
-  const translationInputChangeHandler = (e, index) => {
-    const { name, value } = e.target;
-
-    const updatedTranslation = guide.translations.map((translation, i) => {
-      if (index === i) {
-        return { ...translation, [name]: value };
-      }
-      return translation;
-    });
-    setUpdatedGuide((prevGuide) => {
-      return {
-        ...prevGuide,
-        translations: updatedTranslation,
-      };
-    });
+  const updateTranslation = (newTranslation) => {
+    setUpdatedGuide((prevGuide) => ({
+      ...prevGuide,
+      translations: newTranslation,
+    }));
   };
-
-  // ***************************** end change handlers *****************************
 
   return (
     <Header title="Edit a Guide">
@@ -120,10 +91,13 @@ export const EditGuideForm = ({ guide }) => {
       />
 
       <EditTranslationForm
-        guide={updatedGuide}
-        translationInputChangeHandler={translationInputChangeHandler}
+        translations={updatedGuide.translations}
+        translationInputChangeHandler={updateTranslation}
       />
-      <button className="btn btn-primary" onClick={handleSubmitOnClick}>
+      <button
+        className={`btn btn-primary ${styles.submitBtn}`}
+        onClick={handleSubmitOnClick}
+      >
         Submit
       </button>
       {showModal && <EditGuideModal setShowModal={setShowModal} />}

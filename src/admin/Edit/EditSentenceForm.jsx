@@ -1,11 +1,7 @@
 import { CustomInput } from "../../Components/CustomInput";
 import styles from "./Edit.module.css";
 
-// should be able to add/remove sentences
 export const EditSentenceForm = ({ sentences, sentenceInputChangeHandler }) => {
-  console.log("editSentenceForm ", sentences);
-  // const [sentences, setSentences] = useState(guide.sentences);
-
   const inputChangeHandler = (e, index) => {
     const { name, value } = e.target;
     const updatedSentences = sentences.map((sentence, i) => {
