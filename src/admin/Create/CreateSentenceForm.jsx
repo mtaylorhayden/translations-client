@@ -28,7 +28,7 @@ export const CreateSentenceForm = ({
   };
 
   let content = sentences.map((sentence, sentenceIndex) => {
-    content = (
+    return (
       <div key={sentenceIndex} className={styles.card}>
         <CustomInput
           title="A Side"

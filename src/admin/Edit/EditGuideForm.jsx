@@ -11,7 +11,6 @@ export const EditGuideForm = ({ guide }) => {
   const [updatedGuide, setUpdatedGuide] = useState(guide);
   const [showModal, setShowModal] = useState(false);
   const { updateGuide } = useGuideContext();
-  console.log("updated guide", updatedGuide.sentences);
 
   const handleSubmitOnClick = async (e) => {
     e.preventDefault();

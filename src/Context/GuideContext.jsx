@@ -11,6 +11,10 @@ export const GuideProvider = ({ children }) => {
     setGuides(guides.filter((guide) => guide.id !== id));
   };
 
+  const addGuide = (newGuide) => {
+    setGuides([...guides, newGuide]);
+  };
+
   const updateGuide = (updatedGuide, id) => {
     setGuides((currentGuides) => {
       return currentGuides.map((guide) => {
@@ -50,6 +54,7 @@ export const GuideProvider = ({ children }) => {
         isLoading,
         deleteGuide,
         updateGuide,
+        addGuide,
       }}
     >
       {children}
