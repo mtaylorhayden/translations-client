@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Header } from "../Components/Header";
-import { CustomInput, Input } from "../Components/CustomInput";
+import { Header } from "../../Components/Header";
+import { CustomInput } from "../../Components/CustomInput";
 import styles from "./Create.module.css";
-import { Button } from "../Components/Button";
+import { Button } from "../../Components/Button";
+import { CreateSentenceForm } from "./CreateSentenceForm";
 
-export const CreateGuide = () => {
+export const CreateGuideForm = () => {
   const [guide, setGuide] = useState({
     title: "",
     description: "",
@@ -33,19 +34,13 @@ export const CreateGuide = () => {
     }));
   };
 
-  const sentenceInputChangeHandler = (e, index) => {
-    const { name, value } = e.target;
-
-    const updatedSentence = guide.sentences.map((sentence, i) => {
-      if (index === i) {
-        return { ...sentence, [name]: value };
-      }
-      return sentence;
+  const updateSentence = (newSentence) => {
+    setGuide((prevGuide) => {
+      return {
+        ...prevGuide,
+        sentences: newSentence,
+      };
     });
-    setGuide((prevGuide) => ({
-      ...prevGuide,
-      sentences: updatedSentence,
-    }));
   };
 
   const translationInputChangeHandler = (e, index) => {
@@ -63,25 +58,7 @@ export const CreateGuide = () => {
         translations: updatedTranslation,
       };
     });
-    console.log("updatedTranslation ", guide);
   };
-
-  const sentenceInput = guide.sentences.map((sentence, sentenceIndex) => {
-    return (
-      <div key={sentenceIndex}>
-        <CustomInput
-          placeholder="Sentence A Side"
-          name="aSide"
-          onChangeHandler={(e) => sentenceInputChangeHandler(e, sentenceIndex)}
-        />
-        <CustomInput
-          placeholder="Sentence B Side"
-          name="bSide"
-          onChangeHandler={(e) => sentenceInputChangeHandler(e, sentenceIndex)}
-        />
-      </div>
-    );
-  });
 
   const translationInput = guide.translations.map(
     (translation, translationIndex) => {
@@ -120,24 +97,31 @@ export const CreateGuide = () => {
         placeholder="Title"
         onChangeHandler={guideInputChangeHandler}
         name="title"
+        value={guide.title}
       />
       <CustomInput
         placeholder="Description"
         onChangeHandler={guideInputChangeHandler}
         name="description"
+        value={guide.description}
       />
       <CustomInput
         placeholder="Sub Description"
         name="subDescription"
         onChangeHandler={guideInputChangeHandler}
+        value={guide.subDescription}
       />
       <CustomInput
         placeholder="Examples"
         name="examples"
         onChangeHandler={guideInputChangeHandler}
+        value={guide.examples}
       />
       <h2 className={styles.label}>Sentence Fields</h2>
-      {sentenceInput}
+      <CreateSentenceForm
+        sentences={guide.sentences}
+        sentenceInputChangeHandler={updateSentence}
+      />
       <h2 className={styles.label}>Translation Fields</h2>
       {translationInput}
       <Button data={guide} path={`guides`} />

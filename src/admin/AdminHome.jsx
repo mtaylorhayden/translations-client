@@ -43,6 +43,12 @@ export const AdminHome = () => {
       title="Admin Home Page"
       description="This page is used for admins only. Create, update, or remove guides and their sentences and translations."
     >
+      <Link
+        to="/admin/Create/createGuideForm"
+        className={`btn btn-primary ${styles.createGuideButton}`}
+      >
+        Create Guide
+      </Link>
       {content}
     </Header>
   );

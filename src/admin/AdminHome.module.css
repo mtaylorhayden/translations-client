@@ -30,4 +30,9 @@ p {
   margin-bottom: 5%;
 }
 
+.createGuideButton {
+  margin-bottom: 5%;
+  width: 18rem;
+}
+
 /* viewport styles here todo */

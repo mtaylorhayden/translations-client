@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Header } from "../Components/Header";
-import { useGuideContext } from "../Context/GuideContext";
-import { Button } from "../Components/Button";
+import { Header } from "../../Components/Header";
+import { useGuideContext } from "../../Context/GuideContext";
+import { Button } from "../../Components/Button";
 import styles from "./Create.module.css";
-import { Dropdown } from "../Components/Dropdown";
-import { CustomInput } from "../Components/CustomInput";
+import { Dropdown } from "../../Components/Dropdown";
+import { CustomInput } from "../../Components/CustomInput";
 
 export const CreateTranslation = () => {
   const { selectedGuide, setSelectedGuide } = useGuideContext();
