@@ -1,14 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Header } from "../Components/Header";
 import { useAuthContext } from "../Context/AuthContext";
 import styles from "./Auth.module.css";
-// todo, send request, and handle token.
+import { useNavigate } from "react-router-dom";
+
+// when user logs in they are redirected to the homepage.
 export const SignIn = () => {
-  const { signIn } = useAuthContext();
+  const { signIn, authToken } = useAuthContext();
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (authToken) {
+      navigate("/home");
+    }
+  }, [authToken, navigate]);
+
+  const handleSignIn = (e) => {
+    // console.log("user", user);
+    signIn(user);
+    // if successful then redirect to homepage
+    console.log("authToken", authToken);
+  };
 
   return (
     <Header title="Log In">
@@ -30,7 +46,7 @@ export const SignIn = () => {
       </div>
       <button
         className={`btn btn-primary ${styles.button}`}
-        onClick={() => signIn(user)}
+        onClick={handleSignIn}
       >
         Sign In
       </button>

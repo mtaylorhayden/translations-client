@@ -7,6 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [authToken, setAuthToken] = useState(Cookies.get("token"));
 
   useEffect(() => {
+    console.log("useEffect gets token ", Cookies.get("token"));
     setAuthToken(Cookies.get("token"));
   }, []);
 
@@ -21,9 +22,18 @@ export const AuthProvider = ({ children }) => {
         password: payload.password,
       }),
     });
+    console.log("signIn response ", response);
+    if (response.status !== 200) {
+      return false;
+    }
     const { access_token } = await response.json();
     Cookies.set("token", access_token, { expires: 1 });
     setAuthToken(access_token);
+
+    // logs
+    console.log("Cookies token ", Cookies.get("token"));
+    console.log("response access_token ", access_token);
+    return true;
   };
 
   const logout = () => {
