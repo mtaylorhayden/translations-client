@@ -1,8 +1,10 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useAuthContext } from "./AuthContext";
 
 const GuideContext = createContext();
 
 export const GuideProvider = ({ children }) => {
+  const { authToken } = useAuthContext();
   const [selectedGuide, setSelectedGuide] = useState(null);
   const [guides, setGuides] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -26,24 +28,32 @@ export const GuideProvider = ({ children }) => {
     });
   };
 
+  // how can we use our authToken to authorize the user to make the request?
+  // i think we should set authToken as a dependency because we only want to load this when the user logs in
   useEffect(() => {
     const fetchData = async () => {
       try {
         console.log("fetching guides");
-        const response = await fetch("http://localhost:8080/guides");
-        const data = await response.json();
-        setGuides(data);
-        // setting default value for selectedGuide for createSentence and createTranslation
-        if (data && data.length > 0) {
-          setSelectedGuide(data[0].id);
+        if (authToken) {
+          const response = await fetch("http://localhost:8080/guides", {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          });
+          const data = await response.json();
+          setGuides(data);
+          // setting default value for selectedGuide for createSentence and createTranslation
+          if (data && data.length > 0) {
+            setSelectedGuide(data[0].id);
+          }
+          setIsLoading(false);
         }
-        setIsLoading(false);
       } catch (error) {
         console.log("error ", error);
       }
     };
     fetchData();
-  }, []);
+  }, [authToken]);
 
   return (
     <GuideContext.Provider

@@ -6,19 +6,20 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import { useGuideContext } from "../Context/GuideContext";
 import { useAuthContext } from "../Context/AuthContext";
+import { useEffect } from "react";
 
-// wrap this in authenticated flag
 export const NavigationBar = () => {
-  const { isAuthenticated } = useAuthContext();
-  const { setSelectedGuide } = useGuideContext();
-  const { guides } = useGuideContext();
-  const { isLoading } = useGuideContext();
-  console.log("navbar ", isAuthenticated);
+  const { authToken } = useAuthContext();
+  const { setSelectedGuide, guides, isLoading } = useGuideContext();
 
   const handleGuideClick = (id) => {
     const guide = guides.find((item) => item.id === id);
     setSelectedGuide(guide);
   };
+
+  // useEffect(() => {
+  //   console.log("navbar ", authToken);
+  // }, [authToken]);
 
   // this content can be set to our default
   let content = (
@@ -36,7 +37,7 @@ export const NavigationBar = () => {
     </>
   );
 
-  if (!isLoading && isAuthenticated) {
+  if (!isLoading && authToken) {
     content = guides.map((guide) => {
       return (
         <Nav className={`${styles.NavLinkLinks} me-auto`}>

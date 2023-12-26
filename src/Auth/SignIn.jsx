@@ -4,7 +4,7 @@ import { useAuthContext } from "../Context/AuthContext";
 import styles from "./Auth.module.css";
 import { useNavigate } from "react-router-dom";
 
-// when user logs in they are redirected to the homepage.
+// todo show some error when the user enters incorrect username/password
 export const SignIn = () => {
   const { signIn, authToken } = useAuthContext();
   const navigate = useNavigate();
