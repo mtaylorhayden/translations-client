@@ -6,20 +6,31 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import { useGuideContext } from "../Context/GuideContext";
 import { useAuthContext } from "../Context/AuthContext";
-import { useEffect } from "react";
+import { render } from "@testing-library/react";
 
 export const NavigationBar = () => {
   const { authToken } = useAuthContext();
   const { setSelectedGuide, guides, isLoading } = useGuideContext();
+  let dropdown;
 
   const handleGuideClick = (id) => {
     const guide = guides.find((item) => item.id === id);
     setSelectedGuide(guide);
   };
 
-  // useEffect(() => {
-  //   console.log("navbar ", authToken);
-  // }, [authToken]);
+  const renderDropdownItems = () => {
+    return guides.map((guide) => (
+      <NavDropdown.Item key={guide.id}>
+        <Link
+          className={styles.NavLinkLinks}
+          to={`guide/${guide.id}`}
+          onClick={() => handleGuideClick(guide.id)}
+        >
+          {guide.title}
+        </Link>
+      </NavDropdown.Item>
+    ));
+  };
 
   // this content can be set to our default
   let content = (
@@ -38,39 +49,31 @@ export const NavigationBar = () => {
   );
 
   if (!isLoading && authToken) {
-    content = guides.map((guide) => {
-      return (
-        <Nav className={`${styles.NavLinkLinks} me-auto`}>
-          <Nav.Link>
-            <Link className={styles.NavLinkLinks} to="/admin">
-              Admin
+    dropdown = renderDropdownItems();
+    content = (
+      <>
+        <Nav.Link>
+          <Link className={styles.NavLinkLinks} to="/admin">
+            Admin
+          </Link>
+        </Nav.Link>
+        <Nav.Link>
+          <Link className={styles.NavLinkLinks} to="typing">
+            Typing
+          </Link>
+        </Nav.Link>
+        <NavDropdown
+          className={styles.NavLinkLinks}
+          title={
+            <Link className={styles.NavLinkLinks} to="guides">
+              Guides
             </Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link className={styles.NavLinkLinks} to="typing">
-              Typing
-            </Link>
-          </Nav.Link>
-          <NavDropdown
-            className={styles.NavLinkLinks}
-            title={
-              <Link className={styles.NavLinkLinks} to="guides">
-                Guides
-              </Link>
-            }
-          ></NavDropdown>
-          <NavDropdown.Item key={guide.id}>
-            <Link
-              className={styles.NavLinkLinks}
-              to={`guide/${guide.id}`}
-              onClick={() => handleGuideClick(guide.id)}
-            >
-              {guide.title}
-            </Link>
-          </NavDropdown.Item>
-        </Nav>
-      );
-    });
+          }
+        >
+          {dropdown}
+        </NavDropdown>
+      </>
+    );
   }
 
   return (
@@ -82,7 +85,9 @@ export const NavigationBar = () => {
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-na v" />
-        <Navbar.Collapse id="basic-navbar-nav">{content}</Navbar.Collapse>
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className={`${styles.NavLinkLinks} me-auto`}>{content}</Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

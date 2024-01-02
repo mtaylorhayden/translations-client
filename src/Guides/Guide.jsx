@@ -5,10 +5,12 @@ import { PresentContinousTable } from "../Tables/PresentContinousTable";
 import { Header } from "../Components/Header";
 import { useEffect, useState } from "react";
 import { Practice } from "./Practice";
+import { useAuthContext } from "../Context/AuthContext";
 
 export const Guide = () => {
   const { guideId } = useParams();
   const [guide, setGuide] = useState();
+  const { authToken } = useAuthContext();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [practiceIsHidden, setPracticeIsHidden] = useState(true);
@@ -16,12 +18,21 @@ export const Guide = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/guides/${guideId}`);
-        if (!response.ok) {
-          setError("Sorry, we are having some issues");
+        if (authToken) {
+          const response = await fetch(
+            `http://localhost:8080/guides/${guideId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${authToken}`,
+              },
+            }
+          );
+          if (!response.ok) {
+            setError("Sorry, we are having some issues");
+          }
+          const data = await response.json();
+          setGuide(data);
         }
-        const data = await response.json();
-        setGuide(data);
       } catch (error) {
         setError(error);
       } finally {

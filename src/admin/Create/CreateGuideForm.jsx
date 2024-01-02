@@ -6,10 +6,12 @@ import { CreateSentenceForm } from "./CreateSentenceForm";
 import { CreateTranslationForm } from "./CreateTranslationForm";
 import { CreateGuideModal } from "./CreateGuideModal";
 import { useGuideContext } from "../../Context/GuideContext";
+import { useAuthContext } from "../../Context/AuthContext";
 
 export const CreateGuideForm = () => {
   const [showModal, setShowModal] = useState(false);
   const { addGuide } = useGuideContext();
+  const { authToken } = useAuthContext();
   const [guide, setGuide] = useState({
     title: "",
     description: "",
@@ -36,6 +38,7 @@ export const CreateGuideForm = () => {
       const response = await fetch(`http://localhost:8080/guides`, {
         method: "POST",
         headers: {
+          Authorization: `Bearer ${authToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(guide),

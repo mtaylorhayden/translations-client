@@ -1,6 +1,6 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { NavigationBar } from "./Components/NavigationBar";
+import { NavigationBar } from "./Navigation/NavigationBar";
 import { Route, Routes } from "react-router-dom";
 import { Typing } from "./Workbooks/Typing";
 import { HomePage } from "./Home/HomePage";
