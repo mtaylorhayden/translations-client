@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }) => {
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
-    console.log("useEffect gets token ", Cookies.get("token"));
     setAuthToken(Cookies.get("token"));
   }, []);
 
@@ -24,7 +23,6 @@ export const AuthProvider = ({ children }) => {
         password: payload.password,
       }),
     });
-    console.log("signIn response ", response);
     if (response.status !== 200) {
       return false;
     }
@@ -32,9 +30,6 @@ export const AuthProvider = ({ children }) => {
     Cookies.set("token", access_token, { expires: 1 });
     setAuthToken(access_token);
     setUserRoleFromToken();
-    // logs
-    console.log("roles ", userRole);
-    console.log("response access_token ", access_token);
     return true;
   };
 
@@ -56,6 +51,7 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     Cookies.remove("token");
     setAuthToken(null);
+    setUserRole(null);
   };
 
   return (

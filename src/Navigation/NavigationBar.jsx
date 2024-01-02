@@ -6,16 +6,30 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import { Link } from "react-router-dom";
 import { useGuideContext } from "../Context/GuideContext";
 import { useAuthContext } from "../Context/AuthContext";
-import { render } from "@testing-library/react";
 
+// todo i think we should have different navbars for different roles
+// if user is admin, show admin page
 export const NavigationBar = () => {
-  const { authToken } = useAuthContext();
+  const { authToken, userRole } = useAuthContext();
   const { setSelectedGuide, guides, isLoading } = useGuideContext();
   let dropdown;
 
   const handleGuideClick = (id) => {
     const guide = guides.find((item) => item.id === id);
     setSelectedGuide(guide);
+  };
+
+  const showAdminPage = () => {
+    if (userRole === "admin") {
+      console.log("showing admin page");
+      return (
+        <Nav.Link>
+          <Link className={styles.NavLinkLinks} to="/admin">
+            Admin
+          </Link>
+        </Nav.Link>
+      );
+    }
   };
 
   const renderDropdownItems = () => {
@@ -52,11 +66,7 @@ export const NavigationBar = () => {
     dropdown = renderDropdownItems();
     content = (
       <>
-        <Nav.Link>
-          <Link className={styles.NavLinkLinks} to="/admin">
-            Admin
-          </Link>
-        </Nav.Link>
+        {showAdminPage()}
         <Nav.Link>
           <Link className={styles.NavLinkLinks} to="typing">
             Typing
