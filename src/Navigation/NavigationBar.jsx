@@ -7,8 +7,7 @@ import { Link } from "react-router-dom";
 import { useGuideContext } from "../Context/GuideContext";
 import { useAuthContext } from "../Context/AuthContext";
 
-// todo i think we should have different navbars for different roles
-// if user is admin, show admin page
+// todo add signout functionality
 export const NavigationBar = () => {
   const { authToken, userRole } = useAuthContext();
   const { setSelectedGuide, guides, isLoading } = useGuideContext();
@@ -46,7 +45,6 @@ export const NavigationBar = () => {
     ));
   };
 
-  // this content can be set to our default
   let content = (
     <>
       <Nav.Link>

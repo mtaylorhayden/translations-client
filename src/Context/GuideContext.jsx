@@ -28,8 +28,6 @@ export const GuideProvider = ({ children }) => {
     });
   };
 
-  // how can we use our authToken to authorize the user to make the request?
-  // i think we should set authToken as a dependency because we only want to load this when the user logs in
   useEffect(() => {
     const fetchData = async () => {
       try {
