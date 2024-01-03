@@ -2,21 +2,28 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useGuideContext } from "../Context/GuideContext";
+import { useAuthContext } from "../Context/AuthContext";
 
 export const DeleteGuideModal = ({ title, guideId }) => {
   const [show, setShow] = useState(false);
   const { deleteGuide } = useGuideContext();
+  const { authToken } = useAuthContext();
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const handleDelete = async () => {
     try {
-      await fetch(`http://localhost:8080/guides/${guideId}`, {
-        method: "DELETE",
-      });
-      deleteGuide(guideId);
-      handleClose();
+      if (authToken) {
+        await fetch(`http://localhost:8080/guides/${guideId}`, {
+          headers: {
+            Authorization: `Bearer ${authToken}`,
+          },
+          method: "DELETE",
+        });
+        deleteGuide(guideId);
+        handleClose();
+      }
     } catch (error) {
       console.log("error ", error);
     }

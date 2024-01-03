@@ -6,11 +6,13 @@ import { EditGuideModal } from "./EditGuideModal";
 import { useGuideContext } from "../../Context/GuideContext";
 import { EditSentenceForm } from "./EditSentenceForm";
 import { EditTranslationForm } from "./EditTranslationForm";
+import { useAuthContext } from "../../Context/AuthContext";
 
 export const EditGuideForm = ({ guide }) => {
   const [updatedGuide, setUpdatedGuide] = useState(guide);
   const [showModal, setShowModal] = useState(false);
   const { updateGuide } = useGuideContext();
+  const { authToken } = useAuthContext();
 
   const handleSubmitOnClick = async (e) => {
     e.preventDefault();
@@ -19,6 +21,7 @@ export const EditGuideForm = ({ guide }) => {
       const response = await fetch(`http://localhost:8080/guides/${id}`, {
         method: "PATCH",
         headers: {
+          Authorization: `Bearer ${authToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify(guideData),

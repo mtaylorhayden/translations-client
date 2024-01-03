@@ -5,6 +5,7 @@ import styles from "./Typing.module.css";
 import containerStyles from "../Styles/Container.module.css";
 import headerStyles from "../Styles/Header.module.css";
 import descriptionStyles from "../Styles/Description.module.css";
+import { useAuthContext } from "../Context/AuthContext";
 
 export const Typing = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -13,11 +14,17 @@ export const Typing = () => {
   const [userTranslation, setUserTranslation] = useState("");
   const [isCorrect, setIsCorrect] = useState(false);
   const [translationCounter, setTranslationCounter] = useState(0);
+  const { authToken } = useAuthContext();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:8080/translations");
+        const response = await fetch("http://localhost:8080/translations", {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
+        });
         const data = await response.json();
         setTranslations(data);
 
