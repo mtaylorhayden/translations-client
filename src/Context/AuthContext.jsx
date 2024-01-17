@@ -1,56 +1,60 @@
 import Cookies from "js-cookie";
 import { createContext, useContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
+import { redirect } from "react-router-dom";
 
 const AuthContext = createContext();
 
-// todo see if the token refreshing is working
-// if the token is expired then refresh it
+// todo
+// signout
+// token refresh
+// register
 export const AuthProvider = ({ children }) => {
-  const [authToken, setAuthToken] = useState(Cookies.get("token"));
+  const [isAuth, setIsAuth] = useState(false);
   const [userRole, setUserRole] = useState(null);
 
-  useEffect(() => {
-    setAuthToken(Cookies.get("token"));
-  }, []);
+  // useEffect(() => {
+  //   setAuthToken(Cookies.get("token"));
+  // }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      refreshToken();
-    }, 5 * 60 * 1000); // check every 5 minutes
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     refreshToken();
+  //   }, 5 * 60 * 1000); // check every 5 minutes
 
-    return () => clearInterval(interval);
-  }, [authToken]);
+  //   return () => clearInterval(interval);
+  // }, [authToken]);
 
-  const refreshToken = async () => {
-    const token = Cookies.get("token");
-    if (!token) return;
+  // const refreshToken = async () => {
+  //   const token = Cookies.get("token");
+  //   if (!token) return;
 
-    const decodedToken = jwtDecode(authToken);
-    const currentEpochTime = Math.floor(Date.now() / 1000);
-    const timeToExpiry = decodedToken.exp - currentEpochTime;
-    if (timeToExpiry < 300) {
-      // less than 5 mins to expire
-      // call backend to refresh token
-      const reponse = await fetch("http://localhost:8080/auth/refreshToken", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const { access_token } = await reponse.json();
-      const expireTime = setExpireTimeForCookie();
-      Cookies.remove("token");
-      Cookies.set("token", access_token, { expires: expireTime });
-      setAuthToken(access_token);
-      setUserRoleFromToken();
-    }
-  };
+  //   const decodedToken = jwtDecode(authToken);
+  //   const currentEpochTime = Math.floor(Date.now() / 1000);
+  //   const timeToExpiry = decodedToken.exp - currentEpochTime;
+  //   if (timeToExpiry < 300) {
+  //     // less than 5 mins to expire
+  //     // call backend to refresh token
+  //     const reponse = await fetch("http://localhost:8080/auth/refreshToken", {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
+  //     const { access_token } = await reponse.json();
+  //     const expireTime = setExpireTimeForCookie();
+  //     Cookies.remove("token");
+  //     Cookies.set("token", access_token, { expires: expireTime });
+  //     // setAuthToken(access_token);
+  //     setUserRoleFromToken();
+  //   }
+  // };
 
   const signIn = async (payload) => {
     const response = await fetch("http://localhost:8080/auth/signIn", {
       method: "POST",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -60,13 +64,13 @@ export const AuthProvider = ({ children }) => {
       }),
     });
     if (response.status !== 200) {
+      // set error message
       return false;
     }
-    const { access_token } = await response.json();
-    const expireTime = setExpireTimeForCookie();
-    Cookies.set("token", access_token, { expires: expireTime });
-    setAuthToken(access_token);
-    setUserRoleFromToken();
+    const { role } = await response.json();
+    console.log(role);
+    setIsAuth(true);
+    setUserRole(role);
 
     return true;
   };
@@ -97,14 +101,13 @@ export const AuthProvider = ({ children }) => {
     setUserRole(role);
   };
 
-  const logout = () => {
-    Cookies.remove("token");
-    setAuthToken(null);
+  const signOut = () => {
+    setIsAuth(false);
     setUserRole(null);
   };
 
   return (
-    <AuthContext.Provider value={{ authToken, signIn, logout, userRole }}>
+    <AuthContext.Provider value={{ isAuth, signIn, signOut, userRole }}>
       {children}
     </AuthContext.Provider>
   );
