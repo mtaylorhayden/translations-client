@@ -10,7 +10,7 @@ import { useAuthContext } from "../Context/AuthContext";
 export const Guide = () => {
   const { guideId } = useParams();
   const [guide, setGuide] = useState();
-  const { authToken } = useAuthContext();
+  const { isAuth } = useAuthContext();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [practiceIsHidden, setPracticeIsHidden] = useState(true);
@@ -18,13 +18,11 @@ export const Guide = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        if (authToken) {
+        if (isAuth) {
           const response = await fetch(
             `http://localhost:8080/guides/${guideId}`,
             {
-              headers: {
-                Authorization: `Bearer ${authToken}`,
-              },
+              credentials: "include",
             }
           );
           if (!response.ok) {

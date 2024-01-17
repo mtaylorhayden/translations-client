@@ -7,9 +7,8 @@ import { Link } from "react-router-dom";
 import { useGuideContext } from "../Context/GuideContext";
 import { useAuthContext } from "../Context/AuthContext";
 
-// todo add signout functionality
 export const NavigationBar = () => {
-  const { authToken, userRole } = useAuthContext();
+  const { isAuth, userRole, signOut } = useAuthContext();
   const { setSelectedGuide, guides, isLoading } = useGuideContext();
   let dropdown;
 
@@ -60,7 +59,7 @@ export const NavigationBar = () => {
     </>
   );
 
-  if (!isLoading && authToken) {
+  if (!isLoading && isAuth) {
     dropdown = renderDropdownItems();
     content = (
       <>
@@ -80,6 +79,11 @@ export const NavigationBar = () => {
         >
           {dropdown}
         </NavDropdown>
+        <Nav.Link>
+          <Link onClick={signOut} className={styles.NavLinkLinks} to="/">
+            Sign Out
+          </Link>
+        </Nav.Link>
       </>
     );
   }

@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { Header } from "../Components/Header";
 import { useAuthContext } from "../Context/AuthContext";
 import styles from "./Auth.module.css";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 // todo show some error when the user enters incorrect username/password
 export const SignIn = () => {
-  const { signIn, authToken } = useAuthContext();
+  const { signIn, isAuth } = useAuthContext();
   const navigate = useNavigate();
   const [user, setUser] = useState({
     username: "",
@@ -14,16 +14,14 @@ export const SignIn = () => {
   });
 
   useEffect(() => {
-    if (authToken) {
+    if (isAuth) {
       navigate("/home");
     }
-  }, [authToken, navigate]);
+  }, [isAuth, navigate]);
 
   const handleSignIn = (e) => {
-    // console.log("user", user);
     signIn(user);
-    // if successful then redirect to homepage
-    console.log("authToken", authToken);
+    return redirect("/");
   };
 
   return (

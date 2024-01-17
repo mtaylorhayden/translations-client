@@ -1,10 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useAuthContext } from "./AuthContext";
+import axios from "axios";
 
 const GuideContext = createContext();
 
 export const GuideProvider = ({ children }) => {
-  const { authToken } = useAuthContext();
+  const { isAuth, userRole } = useAuthContext();
   const [selectedGuide, setSelectedGuide] = useState(null);
   const [guides, setGuides] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -12,7 +13,6 @@ export const GuideProvider = ({ children }) => {
   const deleteGuide = (id) => {
     setGuides(guides.filter((guide) => guide.id !== id));
   };
-
   const addGuide = (newGuide) => {
     setGuides([...guides, newGuide]);
   };
@@ -32,11 +32,9 @@ export const GuideProvider = ({ children }) => {
     const fetchData = async () => {
       try {
         console.log("fetching guides");
-        if (authToken) {
+        if (isAuth) {
           const response = await fetch("http://localhost:8080/guides", {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-            },
+            credentials: "include",
           });
           const data = await response.json();
           setGuides(data);
@@ -51,7 +49,7 @@ export const GuideProvider = ({ children }) => {
       }
     };
     fetchData();
-  }, [authToken]);
+  }, [isAuth]);
 
   return (
     <GuideContext.Provider
